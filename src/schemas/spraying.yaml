@@ -1,0 +1,28 @@
+name: Spraying
+type: object
+properties:
+    - sprayer:
+      name: Sprayer
+      type: string
+      enum: [RB16, RB26, RB35]
+    - farmer:
+      name: Farmer
+      type: string
+    - crop:
+      name: Crop
+      type: string
+    - hectares:
+      name: Hectares
+      type: number
+      min: 1
+    - concentration:
+      name: Litres/ha
+      type: string
+      enum:
+          - '200'
+          - 201-250
+          - 251-300
+          - 301-350
+          - 351-400
+          - 401-450
+          - 451-500
