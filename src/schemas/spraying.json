@@ -1,0 +1,37 @@
+{
+    "name": "Spraying",
+    "type": "object",
+    "properties": [
+        {
+            "name": "Sprayer",
+            "type": "string",
+            "enum": ["RB16", "RB26", "RB35"]
+        },
+        {
+            "name": "Farmer",
+            "type": "string"
+        },
+        {
+            "name": "Crop",
+            "type": "string"
+        },
+        {
+            "name": "Hectares",
+            "type": "number",
+            "min": 1
+        },
+        {
+            "name": "Litres/ha",
+            "type": "string",
+            "enum": [
+                "200",
+                "201-250",
+                "251-300",
+                "301-350",
+                "351-400",
+                "401-450",
+                "451-500"
+            ]
+        }
+    ]
+}

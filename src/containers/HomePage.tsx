@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Button, TextInput } from 'react-native';
+import { Button } from 'react-native';
 
 export const WelcomePage: FC<{ name: string }> = ({ name }) => {
     return (
