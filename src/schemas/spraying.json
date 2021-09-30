@@ -1,27 +1,29 @@
 {
     "name": "Spraying",
     "type": "object",
-    "properties": [
-        {
-            "name": "Sprayer",
+    "additionalProperties": false,
+    "required": ["Sprayer", "Farmer", "Crop", "Hectares", "Litres/ha"],
+    "properties": {
+        "Sprayer" : {
             "type": "string",
             "enum": ["RB16", "RB26", "RB35"]
         },
-        {
-            "name": "Farmer",
-            "type": "string"
+        "Farmer": {
+            "type": "string",
+            "pattern": "^[a-zA-z ]$",
+            "error": "Please use only letters and spaces"
         },
-        {
-            "name": "Crop",
-            "type": "string"
+        "Crop": {
+            "type": "string",
+            "pattern": "^[a-zA-z ]$",
+            "error": "Please use only letters and spaces"
         },
-        {
-            "name": "Hectares",
+        "Hectares": {
             "type": "number",
-            "min": 1
+            "min": 1,
+            "error": "Please enter a positive number"
         },
-        {
-            "name": "Litres/ha",
+        "Litres/ha": {
             "type": "string",
             "enum": [
                 "200",
@@ -33,5 +35,5 @@
                 "451-500"
             ]
         }
-    ]
+    }
 }

@@ -11,6 +11,7 @@ export const NewWorksheetPage: FC = () => {
             <Text>Select Worksheet Type:</Text>
             {schemas.map((sch) => (
                 <Button
+                    key={sch.name}
                     title={sch.name}
                     onPress={() => {
                         setPage(<WorksheetPage schema={sch} />);

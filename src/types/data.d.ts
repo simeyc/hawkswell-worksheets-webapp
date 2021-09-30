@@ -1,1 +1,5 @@
-export type DataValue = string | number | boolean | undefined;
+export type WorksheetValue = string | number | boolean;
+
+export type FieldValue = WorksheetValue | undefined;
+
+export type WorksheetData = Record<string, WorksheetValue>;
