@@ -1,21 +1,32 @@
 {
-    "name": "Spraying",
     "type": "object",
     "additionalProperties": false,
-    "required": ["Sprayer", "Farmer", "Crop", "Hectares", "Litres/ha"],
+    "required": ["Job Type", "Driver", "Sprayer", "Farmer", "Crop", "Hectares", "Litres/ha"],
     "properties": {
+        "Job Type": {
+            "type": "string",
+            "const": "Spraying",
+            "hidden": true
+        },
+        "Driver": {
+            "type": "string",
+            "pattern": "^[a-zA-z ]+$",
+            "placeholder": "Enter your name",
+            "error": "Please use only letters and spaces"
+        },
         "Sprayer" : {
             "type": "string",
             "enum": ["RB16", "RB26", "RB35"]
         },
         "Farmer": {
             "type": "string",
-            "pattern": "^[a-zA-z ]$",
+            "pattern": "^[a-zA-z ]+$",
+            "placeholder": "Enter customer's name",
             "error": "Please use only letters and spaces"
         },
         "Crop": {
             "type": "string",
-            "pattern": "^[a-zA-z ]$",
+            "pattern": "^[a-zA-z ]+$",
             "error": "Please use only letters and spaces"
         },
         "Hectares": {

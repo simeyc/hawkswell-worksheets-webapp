@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { Picker } from '@react-native-picker/picker';
-import { FieldValue, WorksheetValue } from 'types';
+import { WorksheetValue } from 'types';
 
 interface DropdownProps {
     options: string[] | number[];
-    value: FieldValue;
+    value?: WorksheetValue;
     setValue: (value: WorksheetValue) => void;
 }
 

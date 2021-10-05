@@ -9,15 +9,18 @@ export const NewWorksheetPage: FC = () => {
     return (
         <>
             <Text>Select Worksheet Type:</Text>
-            {schemas.map((sch) => (
-                <Button
-                    key={sch.name}
-                    title={sch.name}
-                    onPress={() => {
-                        setPage(<WorksheetPage schema={sch} />);
-                    }}
-                />
-            ))}
+            {schemas.map((sch) => {
+                const jobType = sch.properties["Job Type"].const;
+                return (
+                    <Button
+                        key={jobType}
+                        title={jobType}
+                        onPress={() => {
+                            setPage(<WorksheetPage schema={sch} />);
+                        }}
+                    />
+                );
+            })}
         </>
     );
 };
