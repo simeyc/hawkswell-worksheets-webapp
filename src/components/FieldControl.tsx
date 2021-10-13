@@ -10,15 +10,14 @@ interface FieldControlProps {
     error?: string;
 }
 
-// TODO: use default if undefined?
-const formatValue = (value?: WorksheetValue) => (value ? value.toString() : '');
-
-const INTEGER_REGEX = new RegExp('^\\d+$');
-const NUMBER_REGEX = new RegExp('^\\d+(\\.\\d+)?$')
-
 export const FieldControl: FC<FieldControlProps> = ({ schema, value, setValue, error }) => {
     return (
         <>
+            {error && (
+                <View>
+                    <Text>{error}</Text>
+                </View>
+            )}
             {schema.enum ? (
                 // TODO: use radio buttons instead, dropdown schema.enum.length > MAX_RADIO_OPTS?
                 <Dropdown
@@ -30,21 +29,10 @@ export const FieldControl: FC<FieldControlProps> = ({ schema, value, setValue, e
                     <Switch value={!!value} onValueChange={setValue} />
                 ) : (
                     <TextInput 
-                        value={formatValue(value)}
-                        onChangeText={val => {
-                            const castToNumber = (
-                                (schema.type === 'integer' && INTEGER_REGEX.test(val)) || 
-                                (schema.type === 'number' && NUMBER_REGEX.test(val))
-                            );
-                            setValue(castToNumber ? Number(val) : val);
-                        }}
+                        value={value !== undefined ? value.toString() : ''}
+                        onChangeText={setValue}
                         placeholder={schema.placeholder}
                     />
-            )}
-            {error && (
-                <View>
-                    <Text>{error}</Text>
-                </View>
             )}
         </>
     );

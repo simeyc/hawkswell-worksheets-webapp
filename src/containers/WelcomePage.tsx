@@ -1,15 +1,12 @@
-import { FC, useState, useEffect } from 'react';
-import { Button, TextInput, Text, View } from 'react-native';
+import { FC } from 'react';
+import { Button, Text, View } from 'react-native';
 import { useNavContext } from 'App';
 import { NewWorksheetPage } from 'containers/NewWorksheetPage';
 
 export const WelcomePage: FC = () => {
-    const [name, setName] = useState('');
     const setPage = useNavContext();
-    useEffect(() => {
-        // TODO: load name from local storage (spinner while loading)
-    }, []);
-    console.log('render WelcomePage');
+    let username = localStorage.getItem('username');
+    username = username ? ' ' + username : '';
     return (
         <>
             <View>
@@ -21,23 +18,16 @@ export const WelcomePage: FC = () => {
                 <Text style={{ fontStyle: 'italic' }}>Worksheets App</Text>
             </View>
             <View>
-                <Text>Please enter your name:</Text>
-            </View>
-            <View>
-                <Text>
-                    <TextInput value={name} onChangeText={setName} />
-                </Text>
+                <Text>{`Hi${username}, welcome to the Worksheets Webapp!`}</Text>
             </View>
             <View>
                 <Text>
                     <Button
                         title="Let's get started!"
                         onPress={() => {
-                            // TODO: save name in local storage
-                            // TODO: progress to HomePage
+                            // TODO: use react-router for back/forward support
                             setPage(<NewWorksheetPage />);
                         }}
-                        disabled={!name}
                     />
                 </Text>
             </View>
