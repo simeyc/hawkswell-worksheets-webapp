@@ -1,20 +1,48 @@
-import React, { FC, useState } from 'react';
-import { WelcomePage } from 'containers/WelcomePage';
+import { FC } from 'react';
+import { HomePage } from 'containers/HomePage';
+import { WorksheetPage } from 'containers/WorksheetPage';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect,
+} from 'react-router-dom';
+import schemas from 'schemas';
+import { getSchemaWorksheetType } from 'utils/schemas';
 import 'styles/App.css';
 
-const NavContext = React.createContext((page: React.ReactNode) => {});
-export const useNavContext = () => React.useContext(NavContext);
+const AppRouter: FC = () => (
+    <Router>
+        <Switch>
+            <Route exact path="/">
+                <HomePage />
+            </Route>
+            <Route
+                exact
+                path="/:worksheetType"
+                render={({ match }) => {
+                    const { worksheetType } = match.params;
+                    const schema = schemas.find(
+                        (sch) => getSchemaWorksheetType(sch) === worksheetType
+                    );
+                    return schema ? (
+                        <WorksheetPage schema={schema} />
+                    ) : (
+                        <Redirect to="/" />
+                    );
+                }}
+            />
+            <Redirect to="/" />
+        </Switch>
+    </Router>
+);
 
-const App: FC = () => {
-    const [page, setPage] = useState<React.ReactNode>(<WelcomePage />);
-    console.log('render app page:', page);
-    return (
-        <NavContext.Provider value={setPage}>
-            <div style={{ background: '#e9ffdb' }}>
-                <div style={{ maxWidth: '500px', margin: 'auto' }}>{page}</div>
-            </div>
-        </NavContext.Provider>
-    );
-};
+const App: FC = () => (
+    <div style={{ background: '#e9ffdb' }}>
+        <div style={{ maxWidth: '500px', margin: 'auto' }}>
+            <AppRouter />
+        </div>
+    </div>
+);
 
 export default App;

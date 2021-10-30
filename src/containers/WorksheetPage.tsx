@@ -1,53 +1,13 @@
 import React, { FC, useState, useMemo } from 'react';
 import { Button, Form, Header } from 'semantic-ui-react';
-import {
-    WorksheetSchema,
-    WorksheetData,
-    WorksheetValue,
-    FieldSchema,
-} from 'types';
+import { WorksheetSchema, WorksheetData } from 'types';
 import { FieldControl } from 'components/FieldControl';
-import Ajv, { ValidateFunction } from 'ajv';
-import get from 'lodash.get';
+import Ajv from 'ajv';
+import { getSchemaWorksheetType } from 'utils/schemas';
+import { parseErrors, formatValue } from 'utils/worksheets';
+import { useNavBlock } from 'hooks/useNavBlock';
 
 const ajv = new Ajv({ strict: false, allErrors: true });
-
-const parseErrors = (validate: ValidateFunction) => {
-    const errors: Record<string, string> = {};
-    if (validate.errors) {
-        validate.errors.forEach(({ keyword, params, schemaPath }) => {
-            if (keyword === 'required') {
-                errors[params.missingProperty] = 'Please enter/choose a value';
-            } else {
-                const pathParts = schemaPath.split('/').slice(1, -1);
-                const key = pathParts[pathParts.length - 1];
-                const error = get(
-                    validate.schema,
-                    pathParts.join('.') + '.error'
-                );
-                errors[key] = error || 'Invalid entry';
-            }
-        });
-    }
-    return errors;
-};
-
-const INTEGER_REGEX = new RegExp('^\\d+$');
-const NUMBER_REGEX = new RegExp('^\\d+(\\.\\d+)?$');
-
-const formatValue = (value: WorksheetValue, schema: FieldSchema) => {
-    let val = value;
-    if (typeof val === 'string') {
-        val = val.trim();
-        if (
-            (schema.type === 'integer' && INTEGER_REGEX.test(val)) ||
-            (schema.type === 'number' && NUMBER_REGEX.test(val))
-        ) {
-            val = Number(val);
-        }
-    }
-    return val;
-};
 
 export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
     const initialData = useMemo(() => {
@@ -73,10 +33,12 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
     const [valid, errors] = useMemo(() => {
         return [validate(formattedData), parseErrors(validate)];
     }, [formattedData, validate]);
-    const jobType = schema.properties['Job Type'].const;
+    const worksheetType = getSchemaWorksheetType(schema);
+    const [blockNav, setBlockNav] = useState(false);
+    useNavBlock(blockNav);
     return (
         <Form>
-            <Header>{`New ${jobType} Worksheet`}</Header>
+            <Header>{`New ${worksheetType} Worksheet`}</Header>
             {Object.entries(schema.properties).map(([key, sch]) =>
                 sch.hidden ? null : (
                     <Form.Field key={key}>
@@ -85,6 +47,7 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
                             schema={sch}
                             value={data[key]}
                             setValue={(value) => {
+                                !blockNav && setBlockNav(true);
                                 setData({ ...data, [key]: value });
                                 setFormattedData({
                                     ...formattedData,
@@ -116,6 +79,7 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
                         })
                         .then(() => {
                             console.log('SHARED SUCCESSFULLY!');
+                            setBlockNav(false);
                         })
                         .catch((err) => {
                             console.warn('FAILED TO SHARE:', err);

@@ -1,0 +1,12 @@
+M HAWKSWELL WORKLOG
+20/09/2021 - 2 hours - Project setup and barebones welcome page
+25/09/2021 - 2 hours - Barebones New Worksheet Page and Sprayer Worksheet
+30/09/2021 - 2 hours - Support default values; correct format of worksheet data
+05/10/2021 - 2.5 hours - Show error messages for invalid entries
+13/10/2021 - 2.5 hours - Trim spaces in inputs; store username; primitive share functionality
+28/10/2021 - 2.5 hours - Port to react & semantic-ui to speed development and styling
+30/10/2021 - 1.5 hours - Add routing (back/forward browser button support); combine Welcome and New Worksheet pages; nav prompt to warn data loss
+
+NEXT: Fix style issues (semantic Popup and <Input error /> not working; full-height background)
+NEXT: Allow download where share not supported; share in CSV format; remove nav prompt following share
+NEXT: Polish styling and address TODOs; add back/cancel button on WorksheetPage
