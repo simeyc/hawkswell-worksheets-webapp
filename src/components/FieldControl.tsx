@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { FieldSchema, WorksheetValue } from 'types';
-import { Switch, TextInput, View, Text } from 'react-native';
-import { Dropdown } from 'components/Dropdown';
+import { Dropdown, Checkbox, Input, Popup } from 'semantic-ui-react';
 
 interface FieldControlProps {
     schema: FieldSchema;
@@ -10,30 +9,42 @@ interface FieldControlProps {
     error?: string;
 }
 
-export const FieldControl: FC<FieldControlProps> = ({ schema, value, setValue, error }) => {
-    return (
-        <>
-            {error && (
-                <View>
-                    <Text>{error}</Text>
-                </View>
-            )}
-            {schema.enum ? (
-                // TODO: use radio buttons instead, dropdown schema.enum.length > MAX_RADIO_OPTS?
-                <Dropdown
-                    options={schema.enum}
-                    value={value}
-                    setValue={setValue}
-                />
-                ) : schema.type === 'boolean' ? (
-                    <Switch value={!!value} onValueChange={setValue} />
-                ) : (
-                    <TextInput 
-                        value={value !== undefined ? value.toString() : ''}
-                        onChangeText={setValue}
-                        placeholder={schema.placeholder}
-                    />
-            )}
-        </>
+const CtrlComponent: FC<FieldControlProps> = ({
+    schema,
+    value,
+    setValue,
+    error,
+}) =>
+    schema.enum ? (
+        // TODO: use radio buttons instead, dropdown schema.enum.length > MAX_RADIO_OPTS?
+        <Dropdown
+            selection
+            options={schema.enum.map((opt) => ({ text: opt, value: opt }))}
+            value={value}
+            onChange={(_e, data) => setValue(data.value as WorksheetValue)}
+            placeholder={schema.placeholder}
+            error={!!error}
+        />
+    ) : schema.type === 'boolean' ? (
+        // TODO: dropdown or radio buttons?
+        <Checkbox
+            toggle
+            checked={!!value}
+            onChange={(_e, data) => setValue(!!data.checked)}
+        />
+    ) : (
+        <Input
+            value={value !== undefined ? value.toString() : ''}
+            onChange={(_e, data) => setValue(data.value)}
+            placeholder={schema.placeholder}
+            error={!!error}
+        />
     );
-};
+
+export const FieldControl: FC<FieldControlProps> = ({ error, ...props }) => (
+    <Popup
+        trigger={<CtrlComponent error={error} {...props} />}
+        content={error}
+        disabled={!error}
+    />
+);

@@ -8,7 +8,13 @@ export const useNavContext = () => React.useContext(NavContext);
 const App: FC = () => {
     const [page, setPage] = useState<React.ReactNode>(<WelcomePage />);
     console.log('render app page:', page);
-    return <NavContext.Provider value={setPage}>{page}</NavContext.Provider>;
+    return (
+        <NavContext.Provider value={setPage}>
+            <div style={{ background: '#e9ffdb' }}>
+                <div style={{ maxWidth: '500px', margin: 'auto' }}>{page}</div>
+            </div>
+        </NavContext.Provider>
+    );
 };
 
 export default App;

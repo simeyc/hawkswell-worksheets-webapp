@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Button, Text } from 'react-native';
+import { Button, Form } from 'semantic-ui-react';
 import schemas from 'schemas';
 import { useNavContext } from 'App';
 import { WorksheetPage } from 'containers/WorksheetPage';
@@ -7,20 +7,22 @@ import { WorksheetPage } from 'containers/WorksheetPage';
 export const NewWorksheetPage: FC = () => {
     const setPage = useNavContext();
     return (
-        <>
-            <Text>Select Worksheet Type:</Text>
+        <Form>
+            <Form.Field>
+            <label>Select Worksheet Type:</label>
             {schemas.map((sch) => {
                 const jobType = sch.properties["Job Type"].const;
                 return (
                     <Button
                         key={jobType}
-                        title={jobType}
-                        onPress={() => {
+                        content={jobType}
+                        onClick={() => {
                             setPage(<WorksheetPage schema={sch} />);
                         }}
                     />
                 );
             })}
-        </>
+            </Form.Field>
+        </Form>
     );
 };

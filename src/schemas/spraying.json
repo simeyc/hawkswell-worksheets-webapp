@@ -1,15 +1,15 @@
 {
     "type": "object",
     "additionalProperties": false,
-    "required": ["Job Type", "Date+Time", "Driver", "Sprayer", "Farmer", "Crop", "Hectares", "Litres/ha"],
+    "required": ["Job Type", "Timestamp", "Driver", "Sprayer", "Farmer", "Crop", "Hectares", "Litres/ha"],
     "properties": {
         "Job Type": {
             "type": "string",
             "const": "Spraying",
             "hidden": true
         },
-        "Date+Time": {
-            "type": "string",
+        "Timestamp": {
+            "type": "integer",
             "hidden": true
         },
         "Driver": {

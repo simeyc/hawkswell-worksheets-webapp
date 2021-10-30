@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, Header } from 'semantic-ui-react';
 import { useNavContext } from 'App';
 import { NewWorksheetPage } from 'containers/NewWorksheetPage';
 
@@ -9,28 +9,15 @@ export const WelcomePage: FC = () => {
     username = username ? ' ' + username : '';
     return (
         <>
-            <View>
-                <Text style={{ fontWeight: 'bold' }}>
-                    M Hawkswell Contracting Ltd
-                </Text>
-            </View>
-            <View>
-                <Text style={{ fontStyle: 'italic' }}>Worksheets App</Text>
-            </View>
-            <View>
-                <Text>{`Hi${username}, welcome to the Worksheets Webapp!`}</Text>
-            </View>
-            <View>
-                <Text>
-                    <Button
-                        title="Let's get started!"
-                        onPress={() => {
-                            // TODO: use react-router for back/forward support
-                            setPage(<NewWorksheetPage />);
-                        }}
-                    />
-                </Text>
-            </View>
+            <Header>M Hawkswell Contracting Ltd</Header>
+            <div>{`Hi${username}, welcome to the Worksheets Webapp!`}</div>
+            <Button
+                content="Let's get started!"
+                onClick={() => {
+                    // TODO: use react-router for back/forward support
+                    setPage(<NewWorksheetPage />);
+                }}
+            />
         </>
     );
 };
