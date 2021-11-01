@@ -1,0 +1,25 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "pattern": "^[a-zA-z '-]+$",
+            "error": "Please use only plain letters, spaces, ' and - characters"
+        },
+        "plainString": {
+            "type": "string",
+            "pattern": "^[a-zA-z ]+$",
+            "error": "Please use only plain letters and spaces"
+        },
+        "positiveNumber": {
+            "type": "number",
+            "min": 1,
+            "error": "Please enter a positive number"
+        },
+        "positiveInteger": {
+            "type": "integer",
+            "min": 1,
+            "error": "Please enter a positive whole number"
+        }
+    }
+}

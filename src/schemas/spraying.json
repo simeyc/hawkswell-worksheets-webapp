@@ -1,7 +1,17 @@
 {
+    "$id": "spraying",
     "type": "object",
     "additionalProperties": false,
-    "required": ["Job Type", "Timestamp", "Driver", "Sprayer", "Farmer", "Crop", "Hectares", "Litres/ha"],
+    "required": [
+        "Job Type",
+        "Timestamp",
+        "Driver",
+        "Sprayer",
+        "Farmer",
+        "Crop",
+        "Hectares",
+        "Litres/ha"
+    ],
     "properties": {
         "Job Type": {
             "type": "string",
@@ -18,9 +28,10 @@
             "placeholder": "Enter your name",
             "error": "Please use only letters and spaces"
         },
-        "Sprayer" : {
+        "Sprayer": {
             "type": "string",
-            "enum": ["RB16", "RB26", "RB35"]
+            "enum": ["RB16", "RB26", "RB35"],
+            "placeholder": "Select sprayer"
         },
         "Farmer": {
             "type": "string",

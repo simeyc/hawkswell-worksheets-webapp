@@ -1,11 +1,12 @@
-import React, { FC, useState, useMemo } from 'react';
-import { Button, Form, Header } from 'semantic-ui-react';
+import { FC, useState, useMemo } from 'react';
+import { Form, Header, Icon } from 'semantic-ui-react';
 import { WorksheetSchema, WorksheetData } from 'types';
 import { FieldControl } from 'components/FieldControl';
 import Ajv from 'ajv';
 import { getSchemaWorksheetType } from 'utils/schemas';
 import { parseErrors, formatValue } from 'utils/worksheets';
 import { useNavBlock } from 'hooks/useNavBlock';
+import { ShareButton } from 'components/ShareButton';
 
 const ajv = new Ajv({ strict: false, allErrors: true });
 
@@ -22,7 +23,7 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
             if (username) {
                 initData['Driver'] = username;
             }
-            // TODO: set Timestamp, here and/or on Share
+            // set Timestamp here for validity; updated by ShareButton
             initData['Timestamp'] = Date.now();
         });
         return initData;
@@ -41,8 +42,17 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
             <Header>{`New ${worksheetType} Worksheet`}</Header>
             {Object.entries(schema.properties).map(([key, sch]) =>
                 sch.hidden ? null : (
-                    <Form.Field key={key}>
+                    // prevent error affecting dropdown menu formatting
+                    <Form.Field key={key} error={!sch.enum && !!errors[key]}>
                         <label>{key + ':'}</label>
+                        {!!errors[key] && (
+                            <>
+                                <Icon name="warning sign" color="red" />
+                                <span style={{ fontStyle: 'italic' }}>
+                                    {errors[key]}
+                                </span>
+                            </>
+                        )}
                         <FieldControl
                             schema={sch}
                             value={data[key]}
@@ -59,33 +69,10 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
                     </Form.Field>
                 )
             )}
-            {/* TODO: show cancel button with Are You Sure? confirm */}
-            <Button
-                content={valid ? 'Share' : 'Worksheet incomplete'}
-                color={valid ? 'green' : undefined}
-                onClick={async () => {
-                    const username = formattedData['Driver'] as string;
-                    localStorage.setItem('username', username);
-                    // TODO: if !navigator.canShare(), change to download and prompt share instructions
-                    const file = new File(
-                        [JSON.stringify(formattedData)], // TODO: cast to CSV
-                        'my-worksheet.csv', // TODO: worksheet filename
-                        { type: 'text/plain' }
-                    );
-                    await navigator
-                        .share({
-                            files: [file],
-                            title: 'TODO: worksheet title',
-                        })
-                        .then(() => {
-                            console.log('SHARED SUCCESSFULLY!');
-                            setBlockNav(false);
-                        })
-                        .catch((err) => {
-                            console.warn('FAILED TO SHARE:', err);
-                        });
-                }}
-                disabled={!valid}
+            <ShareButton
+                data={formattedData}
+                valid={valid}
+                onShared={() => setBlockNav(false)}
             />
         </Form>
     );

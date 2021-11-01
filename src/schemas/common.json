@@ -1,0 +1,21 @@
+{
+    "$id": "common",
+    "type": "object",
+    "required": ["Job Type", "Timestamp", "Driver", "Customer"],
+    "properties": {
+        "Job Type": {
+            "$ref": "definitions/plainString",
+            "hidden": true
+        },
+        "Timestamp": {
+            "$ref": "definitions/positiveInteger",
+            "hidden": true
+        },
+        "Driver": {
+            "$ref": "definitions/name"
+        },
+        "Customer": {
+            "$ref": "definitions/name"
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import get from 'lodash.get';
 import { ValidateFunction } from 'ajv';
-import { WorksheetValue, FieldSchema } from 'types';
+import { WorksheetValue, FieldSchema, WorksheetData } from 'types';
 
 export const parseErrors = (validate: ValidateFunction) => {
     const errors: Record<string, string> = {};
@@ -37,3 +37,9 @@ export const formatValue = (value: WorksheetValue, schema: FieldSchema) => {
     }
     return val;
 };
+
+export const convertToCsv = (data: WorksheetData) =>
+    Object.keys(data).reduce((acc, x) => acc + ',' + x, '') +
+    '\n' +
+    Object.values(data).reduce((acc, x) => acc + ',' + x, '') +
+    '\n';

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { FieldSchema, WorksheetValue } from 'types';
-import { Dropdown, Checkbox, Input, Popup } from 'semantic-ui-react';
+import { Dropdown, Checkbox, Input } from 'semantic-ui-react';
 
 interface FieldControlProps {
     schema: FieldSchema;
@@ -9,7 +9,7 @@ interface FieldControlProps {
     error?: string;
 }
 
-const CtrlComponent: FC<FieldControlProps> = ({
+export const FieldControl: FC<FieldControlProps> = ({
     schema,
     value,
     setValue,
@@ -19,10 +19,13 @@ const CtrlComponent: FC<FieldControlProps> = ({
         // TODO: use radio buttons instead, dropdown schema.enum.length > MAX_RADIO_OPTS?
         <Dropdown
             selection
-            options={schema.enum.map((opt) => ({ text: opt, value: opt }))}
+            options={schema.enum.map((opt) => ({
+                text: opt,
+                value: opt,
+            }))}
             value={value}
             onChange={(_e, data) => setValue(data.value as WorksheetValue)}
-            placeholder={schema.placeholder}
+            placeholder={schema.placeholder || 'Select a value'}
             error={!!error}
         />
     ) : schema.type === 'boolean' ? (
@@ -36,15 +39,7 @@ const CtrlComponent: FC<FieldControlProps> = ({
         <Input
             value={value !== undefined ? value.toString() : ''}
             onChange={(_e, data) => setValue(data.value)}
-            placeholder={schema.placeholder}
+            placeholder={schema.placeholder || 'Enter a value'}
             error={!!error}
         />
     );
-
-export const FieldControl: FC<FieldControlProps> = ({ error, ...props }) => (
-    <Popup
-        trigger={<CtrlComponent error={error} {...props} />}
-        content={error}
-        disabled={!error}
-    />
-);
