@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Button } from 'semantic-ui-react';
 import { WorksheetData } from 'types';
 import { convertToCsv } from 'utils/worksheets';
+import 'styles/worksheet.css';
 
 interface ShareButtonProps {
     data: WorksheetData;
@@ -52,6 +53,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
     };
     return (
         <Button
+            className="share-button"
             content={valid ? 'Share' : 'Worksheet incomplete'}
             color={valid ? 'green' : undefined}
             onClick={onClick}

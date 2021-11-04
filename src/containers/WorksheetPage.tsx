@@ -7,6 +7,7 @@ import { getSchemaWorksheetType } from 'utils/schemas';
 import { parseErrors, formatValue } from 'utils/worksheets';
 import { useNavBlock } from 'hooks/useNavBlock';
 import { ShareButton } from 'components/ShareButton';
+import 'styles/worksheet.css';
 
 const ajv = new Ajv({ strict: false, allErrors: true });
 

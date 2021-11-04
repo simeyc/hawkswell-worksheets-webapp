@@ -1,0 +1,25 @@
+.title-text {
+    text-align: center;
+    font-style: italic;
+    color: #fdd5b1 !important;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #ff4500;
+}
+
+.subtitle-text {
+    text-align: center;
+    font-style: italic;
+    color: #fdd5b1 !important;
+    margin-top: 0px !important;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #ff4500;
+}
+
+.label-div {
+    margin-bottom: 10px !important;
+}
+
+.worksheet-button {
+    width: 100%;
+    margin-bottom: 12px !important;
+}

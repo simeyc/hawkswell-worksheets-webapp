@@ -38,8 +38,8 @@ const AppRouter: FC = () => (
 );
 
 const App: FC = () => (
-    <div style={{ background: '#e9ffdb' }}>
-        <div style={{ maxWidth: '500px', margin: 'auto' }}>
+    <div style={{ maxWidth: '500px', margin: '0px auto' }}>
+        <div style={{ margin: '20px' }}>
             <AppRouter />
         </div>
     </div>
