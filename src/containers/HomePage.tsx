@@ -3,7 +3,7 @@ import { Form, Header, Button, SemanticCOLORS } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { getSchemaWorksheetType } from 'utils/schemas';
 import schemas from 'schemas';
-import 'styles/homepage.css';
+import 'styles/styles.css';
 
 const COLORS: SemanticCOLORS[] = [
     'orange',

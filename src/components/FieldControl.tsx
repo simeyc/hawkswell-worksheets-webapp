@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { FieldSchema, WorksheetValue } from 'types';
-import { Dropdown, Checkbox, Input } from 'semantic-ui-react';
+import { Dropdown, Checkbox } from 'semantic-ui-react';
+import { DebouncedInput } from 'components/DebouncedInput';
 
-interface FieldControlProps {
+export interface FieldControlProps {
     schema: FieldSchema;
     value?: WorksheetValue;
     setValue: (value: WorksheetValue) => void;
@@ -25,7 +26,7 @@ export const FieldControl: FC<FieldControlProps> = ({
             }))}
             value={value}
             onChange={(_e, data) => setValue(data.value as WorksheetValue)}
-            placeholder={schema.placeholder || 'Select a value'}
+            placeholder={schema.placeholder || 'Select an option'}
             error={!!error}
         />
     ) : schema.type === 'boolean' ? (
@@ -36,9 +37,9 @@ export const FieldControl: FC<FieldControlProps> = ({
             onChange={(_e, data) => setValue(!!data.checked)}
         />
     ) : (
-        <Input
-            value={value !== undefined ? value.toString() : ''}
-            onChange={(_e, data) => setValue(data.value)}
+        <DebouncedInput
+            value={value}
+            setValue={setValue}
             placeholder={schema.placeholder || 'Enter a value'}
             error={!!error}
         />

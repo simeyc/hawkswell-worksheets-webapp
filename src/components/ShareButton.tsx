@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Button } from 'semantic-ui-react';
 import { WorksheetData } from 'types';
 import { convertToCsv } from 'utils/worksheets';
-import 'styles/worksheet.css';
+import 'styles/styles.css';
 
 interface ShareButtonProps {
     data: WorksheetData;

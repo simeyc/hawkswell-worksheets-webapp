@@ -1,0 +1,17 @@
+---
+'$id': common.yaml
+type: object
+required: [Job Type, Timestamp, Driver, Customer]
+properties:
+    Job Type:
+        '$ref': definitions.yaml#/definitions/plainString
+        hidden: true
+    Timestamp:
+        '$ref': definitions.yaml#/definitions/positiveInteger
+        hidden: true
+    Driver:
+        '$ref': definitions.yaml#/definitions/nameString
+        placeholder: Enter your name
+    Customer:
+        '$ref': definitions.yaml#/definitions/nameString
+        placeholder: Enter customer's name

@@ -7,7 +7,9 @@ M HAWKSWELL WORKLOG
 28/10/2021 - 2.5 hours - Port to react & semantic-ui to speed development and styling
 30/10/2021 - 1.5 hours - Add routing (back/forward browser button support); combine Welcome and New Worksheet pages; nav prompt to warn data loss
 30/10/2021 - 2.5 hours - Fix style issues: Dropdown and Input error formatting
+04/11/2021 - 2.5 hours - Fix styling / positioning of items on screen
+06/11/2021 - 2.5 hours - Input debouncing, schema compilation (facilitate adding worksheet types later)
 
-NEXT: Fix style issues (semantic Popup and <Input error /> not working; full-height background)
-NEXT: Allow download where share not supported; share in CSV format; remove nav prompt following share
+NEXT: Allow download where share not supported; share in CSV format
 NEXT: Polish styling and address TODOs; add back/cancel button on WorksheetPage
+NEXT: Suppress errors until edit or Share attempt

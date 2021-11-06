@@ -1,0 +1,21 @@
+---
+'$id': definitions.yaml
+definitions:
+    nameString:
+        type: string
+        pattern: "^[a-zA-z '-]+$"
+        error: Please use only plain letters, spaces, ' and - characters
+    plainString:
+        type: string
+        pattern: '^[a-zA-z ]+$'
+        error: Please use only plain letters and spaces
+    positiveNumber:
+        type: number
+        min: 1
+        error: Please enter a positive number
+        placeholder: Enter a number
+    positiveInteger:
+        type: integer
+        min: 1
+        error: Please enter a positive whole number
+        placeholder: Enter a number

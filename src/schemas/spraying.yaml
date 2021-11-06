@@ -1,0 +1,36 @@
+---
+'$id': spraying.yaml
+allOf:
+    - '$ref': common.yaml
+    - type: object
+      required:
+          - Sprayer
+          - Crop
+          - Hectares
+          - Litres/ha
+      additionalProperties: false
+      properties:
+          Job Type:
+              const: Spraying
+          Sprayer:
+              type: string
+              enum:
+                  - RB16
+                  - RB26
+                  - RB35
+              placeholder: Select sprayer
+          Crop:
+              '$ref': definitions.yaml#/definitions/plainString
+              placeholder: Enter crop name
+          Hectares:
+              '$ref': definitions.yaml#/definitions/positiveNumber
+          Litres/ha:
+              type: string
+              enum:
+                  - '200'
+                  - 201-250
+                  - 251-300
+                  - 301-350
+                  - 351-400
+                  - 401-450
+                  - 451-500
