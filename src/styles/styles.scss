@@ -27,3 +27,20 @@
 .share-button {
     width: 100%;
 }
+
+.error-message {
+    font-style: italic;
+}
+
+.header-div {
+    display: flex;
+    align-items: center;
+    .header-text {
+        flex: 1;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .close-button {
+        flex: 0;
+    }
+}

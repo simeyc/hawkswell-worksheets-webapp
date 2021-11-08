@@ -1,13 +1,14 @@
 import { FC, useState, useMemo } from 'react';
-import { Form, Header, Icon } from 'semantic-ui-react';
+import { Form, Divider, Button } from 'semantic-ui-react';
 import { WorksheetSchema, WorksheetData } from 'types';
-import { FieldControl } from 'components/FieldControl';
 import Ajv from 'ajv';
 import { getSchemaWorksheetType } from 'utils/schemas';
 import { parseErrors, formatValue } from 'utils/worksheets';
 import { useNavBlock } from 'hooks/useNavBlock';
 import { ShareButton } from 'components/ShareButton';
-import 'styles/styles.css';
+import { WorksheetField } from 'components/WorksheetField';
+import { Link } from 'react-router-dom';
+import 'styles/styles.scss';
 
 const ajv = new Ajv({ strict: false, allErrors: true });
 
@@ -40,36 +41,41 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
     useNavBlock(blockNav);
     return (
         <Form>
-            <Header>{`New ${worksheetType} Worksheet`}</Header>
-            {Object.entries(schema.properties).map(([key, sch]) =>
-                sch.hidden ? null : (
-                    // prevent error affecting dropdown menu formatting
-                    <Form.Field key={key} error={!sch.enum && !!errors[key]}>
-                        <label>{key + ':'}</label>
-                        {!!errors[key] && (
-                            <>
-                                <Icon name="warning sign" color="red" />
-                                <span style={{ fontStyle: 'italic' }}>
-                                    {errors[key]}
-                                </span>
-                            </>
-                        )}
-                        <FieldControl
-                            schema={sch}
-                            value={data[key]}
-                            setValue={(value) => {
-                                !blockNav && setBlockNav(true);
-                                setData({ ...data, [key]: value });
-                                setFormattedData({
-                                    ...formattedData,
-                                    [key]: formatValue(value, sch),
-                                });
-                            }}
-                            error={errors[key]}
-                        />
-                    </Form.Field>
-                )
-            )}
+            <div className="header-div">
+                <div className="header-text">{`New ${worksheetType} Worksheet`}</div>
+                <Link to="/">
+                    <Button
+                        className="close-button"
+                        color="red"
+                        icon="close"
+                        size="mini"
+                    />
+                </Link>
+            </div>
+            <Divider />
+            {Object.entries(schema.properties).map(([key, sch]) => (
+                <WorksheetField
+                    key={key}
+                    title={key}
+                    value={data[key]}
+                    setValue={(value) => {
+                        !blockNav && setBlockNav(true);
+                        setData({ ...data, [key]: value });
+                        if (value === '') {
+                            const newFormattedData = { ...formattedData };
+                            delete newFormattedData[key];
+                            setFormattedData(newFormattedData);
+                        } else {
+                            setFormattedData({
+                                ...formattedData,
+                                [key]: formatValue(value, sch),
+                            });
+                        }
+                    }}
+                    schema={sch}
+                    error={errors[key]}
+                />
+            ))}
             <ShareButton
                 data={formattedData}
                 valid={valid}

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const BLOCK_MESSAGE = 'Discard worksheet?';
+const BLOCK_MESSAGE = 'Are you sure you want to discard this worksheet?';
 
 export const useNavBlock = (block: boolean) => {
     const history = useHistory();

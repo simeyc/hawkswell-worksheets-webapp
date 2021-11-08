@@ -5,17 +5,20 @@ import { WorksheetValue, FieldSchema, WorksheetData } from 'types';
 export const parseErrors = (validate: ValidateFunction) => {
     const errors: Record<string, string> = {};
     if (validate.errors) {
+        console.log({ errors: validate.errors });
         validate.errors.forEach(({ keyword, params, schemaPath }) => {
             if (keyword === 'required') {
-                errors[params.missingProperty] = 'Please enter/choose a value';
+                errors[params.missingProperty] = 'Field is required';
             } else {
                 const pathParts = schemaPath.split('/').slice(1, -1);
                 const key = pathParts[pathParts.length - 1];
-                const error = get(
-                    validate.schema,
-                    pathParts.join('.') + '.error'
-                );
-                errors[key] = error || 'Invalid entry';
+                if (!errors[key]) {
+                    const error = get(
+                        validate.schema,
+                        pathParts.join('.') + '.error'
+                    );
+                    errors[key] = error || 'Invalid entry';
+                }
             }
         });
     }
@@ -39,7 +42,11 @@ export const formatValue = (value: WorksheetValue, schema: FieldSchema) => {
 };
 
 export const convertToCsv = (data: WorksheetData) =>
-    Object.keys(data).reduce((acc, x) => acc + ',' + x, '') +
+    Object.keys(data)
+        .reduce((acc, x) => acc + ',' + x, '')
+        .slice(1) +
     '\n' +
-    Object.values(data).reduce((acc, x) => acc + ',' + x, '') +
+    Object.values(data)
+        .reduce((acc: string, x) => acc + ',' + x, '')
+        .slice(1) +
     '\n';
