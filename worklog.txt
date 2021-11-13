@@ -10,6 +10,10 @@ M HAWKSWELL WORKLOG
 04/11/2021 - 2.5 hours - Fix styling / positioning of items on screen
 06/11/2021 - 2.5 hours - Input debouncing, schema compilation (facilitate adding worksheet types later)
 08/11/2021 - 2.5 hours - Hide errors for unedited fields; support download when share unavailable; add Cancel button to Worksheet page
+13/11/2021 - 1 hour - Prevent circular "back" navigation
 
-NEXT: Polish styling and address TODOs
-NEXT: Error modal on Share attempt while invalid
+TODO: prevent form submission on enter (remove semantic ui Form?)
+TODO: mobile dropdowns should show browser full screen option list
+TODO: Polish styling and address TODOs
+TODO: Error modal on Share attempt while invalid
+TODO: Share/download encrypted JSON file (encryption renders frontend useless for users without worksheet manager)

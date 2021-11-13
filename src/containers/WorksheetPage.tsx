@@ -7,7 +7,7 @@ import { parseErrors, formatValue } from 'utils/worksheets';
 import { useNavBlock } from 'hooks/useNavBlock';
 import { ShareButton } from 'components/ShareButton';
 import { WorksheetField } from 'components/WorksheetField';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import 'styles/styles.scss';
 
 const ajv = new Ajv({ strict: false, allErrors: true });
@@ -37,20 +37,20 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
         return [validate(formattedData), parseErrors(validate)];
     }, [formattedData, validate]);
     const worksheetType = getSchemaWorksheetType(schema);
+    const history = useHistory();
     const [blockNav, setBlockNav] = useState(false);
     useNavBlock(blockNav);
     return (
         <Form>
             <div className="header-div">
                 <div className="header-text">{`New ${worksheetType} Worksheet`}</div>
-                <Link to="/">
-                    <Button
-                        className="close-button"
-                        color="red"
-                        icon="close"
-                        size="mini"
-                    />
-                </Link>
+                <Button
+                    className="close-button"
+                    color="red"
+                    icon="close"
+                    size="mini"
+                    onClick={() => history.goBack()}
+                />
             </div>
             <Divider />
             {Object.entries(schema.properties).map(([key, sch]) => (
@@ -76,6 +76,12 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
                     error={errors[key]}
                 />
             ))}
+            <select name="cars" id="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
             <ShareButton
                 data={formattedData}
                 valid={valid}

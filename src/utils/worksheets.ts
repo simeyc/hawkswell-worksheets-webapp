@@ -5,7 +5,6 @@ import { WorksheetValue, FieldSchema, WorksheetData } from 'types';
 export const parseErrors = (validate: ValidateFunction) => {
     const errors: Record<string, string> = {};
     if (validate.errors) {
-        console.log({ errors: validate.errors });
         validate.errors.forEach(({ keyword, params, schemaPath }) => {
             if (keyword === 'required') {
                 errors[params.missingProperty] = 'Field is required';

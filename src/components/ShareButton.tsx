@@ -21,7 +21,6 @@ export const ShareButton: FC<ShareButtonProps> = ({
         const username = data['Driver'] as string;
         localStorage.setItem('username', username);
         data['Timestamp'] = Date.now(); // update Timestamp
-        console.log({ data, keys: Object.keys(data) });
         const csvData = convertToCsv(data);
         const csvFile = new File(
             [csvData],

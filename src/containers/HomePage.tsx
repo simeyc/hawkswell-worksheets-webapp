@@ -18,30 +18,31 @@ const COLORS: SemanticCOLORS[] = [
     'black',
 ];
 
-export const HomePage: FC = () => {
-    return (
-        <Form>
-            <Header className="title-text" size="huge">
-                M. Hawkswell
-            </Header>
-            <Header className="subtitle-text" size="large">
-                Worksheets Webapp
-            </Header>
-            <Form.Field>
-                <label className="label-div">Select a Worksheet Type:</label>
-                {schemas.map((sch, i) => {
-                    const worksheetType = getSchemaWorksheetType(sch);
-                    return (
-                        <Link key={worksheetType} to={'/' + worksheetType}>
-                            <Button
-                                className="worksheet-button"
-                                content={worksheetType}
-                                color={COLORS[i % COLORS.length]}
-                            />
-                        </Link>
-                    );
-                })}
-            </Form.Field>
-        </Form>
-    );
-};
+export const HomePage: FC = () => (
+    <Form>
+        <Header className="title-text" size="huge">
+            M. Hawkswell
+        </Header>
+        <Header className="subtitle-text" size="large">
+            Worksheets Webapp
+        </Header>
+        <Form.Field>
+            <label className="label-div">Select a Worksheet Type:</label>
+            {schemas.map((sch, i) => {
+                const worksheetType = getSchemaWorksheetType(sch);
+                return (
+                    <Link
+                        key={worksheetType}
+                        to={`/worksheet?type=${worksheetType}`}
+                    >
+                        <Button
+                            className="worksheet-button"
+                            content={worksheetType}
+                            color={COLORS[i % COLORS.length]}
+                        />
+                    </Link>
+                );
+            })}
+        </Form.Field>
+    </Form>
+);
