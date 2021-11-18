@@ -4,8 +4,14 @@ import 'styles/styles.scss';
 
 interface MobileDropdownProps extends DropdownProps {
     setValue: (val: DropdownProps['value']) => void;
+    name: string;
 }
 
+/* TODO: idea for using browser "back" to close menu:
+ * pass menuOpen as prop, true when url query has "select=<setting_name>"
+ * onOpen={() => history.push(current_url + '&select=<setting_name>')
+ * onClose={() => history.goBack()}
+ */
 export const MobileDropdown: FC<MobileDropdownProps> = ({
     setValue,
     ...props
@@ -20,10 +26,10 @@ export const MobileDropdown: FC<MobileDropdownProps> = ({
                 <Modal.Content scrolling className="no-padding">
                     <Segment.Group>
                         {/*<Segment
-                        className="header"
-                        content="Pick an option"
-                        size="large"
-                    />*/}
+                            className="header"
+                            content={name + ':'}
+                            size="large"
+                        />*/}
                         {options?.map((opt) => (
                             <Segment
                                 content={opt.text}

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Modal, Button, ModalProps } from 'semantic-ui-react';
+import { Modal, Button, ModalProps, Header } from 'semantic-ui-react';
 
 interface DownloadModalProps extends ModalProps {
     data: string;
@@ -13,7 +13,7 @@ export const DownloadModal: FC<DownloadModalProps> = ({
 }) => {
     return (
         <Modal {...modalProps} onClose={onClose} open={!!data}>
-            <Modal.Header content="Sharing is unavailable" />
+            <Header icon="frown outline" content="Sharing is unavailable" />
             <Modal.Content content="Would you like to download the worksheet instead?" />
             <Modal.Actions>
                 <Button

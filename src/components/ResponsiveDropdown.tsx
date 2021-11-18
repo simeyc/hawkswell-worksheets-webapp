@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { Dropdown, DropdownProps } from 'semantic-ui-react';
 import { WorksheetValue } from 'types';
 import { ResponsiveMedia } from 'components/ResponsiveMedia';
-import { MobileDropdown } from 'components/MobileDropdown';
 
 interface ResponsiveDropdownProps {
     name: string;
@@ -14,35 +13,46 @@ interface ResponsiveDropdownProps {
 }
 
 export const ResponsiveDropdown: FC<ResponsiveDropdownProps> = ({
+    name,
     value,
     setValue,
     options,
     placeholder,
     error,
 }) => {
-    const commonProps: DropdownProps = {
-        value,
-        placeholder: placeholder || 'Select an option',
-        error,
-        selection: true,
-        options: options.map((opt) => ({ text: opt, value: opt })),
-        style: { width: '100%' }, // fix for ResponsiveMedia breaking width
-    };
+    const defaultText = placeholder || 'Select an option';
     return (
         <>
             <ResponsiveMedia greaterThanOrEqual="DESKTOP">
                 <Dropdown
-                    {...commonProps}
+                    value={value}
+                    placeholder={defaultText}
+                    error={error}
+                    selection
+                    options={options.map((opt) => ({ text: opt, value: opt }))}
+                    style={{ width: '100%' }} // fix for ResponsiveMedia breaking width
                     onChange={(_e, data) =>
                         setValue(data.value as WorksheetValue)
                     }
                 />
             </ResponsiveMedia>
             <ResponsiveMedia lessThan="DESKTOP">
-                <MobileDropdown
-                    {...commonProps}
-                    setValue={(val) => setValue(val as WorksheetValue)}
-                />
+                <select
+                    className={`styled-select ${
+                        value === undefined ? 'placeholder' : ''
+                    } ui dropdown selection ${error ? 'error' : ''}`}
+                    onChange={(evt) => setValue(evt.target.value)}
+                    name={name} // for accessibility
+                >
+                    <option value={''} hidden>
+                        {defaultText}
+                    </option>
+                    {options.map((opt) => (
+                        <option key={opt} value={opt}>
+                            {opt}
+                        </option>
+                    ))}
+                </select>
             </ResponsiveMedia>
         </>
     );
