@@ -12,7 +12,8 @@ M HAWKSWELL WORKLOG
 08/11/2021 - 2.5 hours - Hide errors for unedited fields; support download when share unavailable; add Cancel button to Worksheet page
 13/11/2021 - 1 hour - Prevent circular "back" navigation
 15/11/2021 - 2 hours - Work on improving dropdown menus on mobile view.
-15/11/2021 - 1.25 hours - Continue work on improving dropdown menus on mobile view.
+16/11/2021 - 1.25 hours - Continue work on improving dropdown menus on mobile view.
+18/11/2021 - 1.5 hours - Continue improving dropdowns on mobile view.
 
 TODO: prevent form submission on enter (remove semantic ui Form?)
 TODO: mobile dropdowns should show browser full screen option list
