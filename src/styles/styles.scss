@@ -44,3 +44,7 @@
         flex: 0;
     }
 }
+
+.ui.modal > .content.no-padding {
+    padding: 0px !important;
+}

@@ -59,6 +59,7 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
                     title={key}
                     value={data[key]}
                     setValue={(value) => {
+                        console.log('SET VALUE:', value);
                         !blockNav && setBlockNav(true);
                         setData({ ...data, [key]: value });
                         if (value === '') {

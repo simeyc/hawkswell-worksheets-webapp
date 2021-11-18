@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { AppRouter } from 'components/AppRouter';
+import { withResponsiveMedia } from 'components/ResponsiveMedia';
 import 'styles/App.css';
 
 const App: FC = () => (
@@ -10,4 +11,4 @@ const App: FC = () => (
     </div>
 );
 
-export default App;
+export default withResponsiveMedia(App);

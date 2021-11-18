@@ -29,6 +29,7 @@ export const WorksheetField: FC<WorksheetFieldProps> = ({
             <label>{title + ':'}</label>
             <ErrorMessage error={err} />
             <FieldControl
+                name={title}
                 schema={schema}
                 value={value}
                 setValue={(value) => {
