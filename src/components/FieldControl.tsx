@@ -37,7 +37,7 @@ export const FieldControl: FC<FieldControlProps> = ({
             value={value}
             setValue={setValue}
             options={schema.enum}
-            placeholder={schema.placeholder}
+            placeholder={schema.placeholder || 'Select an option'}
             error={!!error}
         />
     ) : schema.type === 'boolean' ? (

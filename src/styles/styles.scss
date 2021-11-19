@@ -51,7 +51,6 @@
 
 select.styled-select {
     padding: 0.5em !important;
-    width: 100%; // fix ResponsiveMedia breaking width
     &.placeholder {
         color: rgba(191, 191, 191, 0.87) !important;
     }

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { HomePage } from 'containers/HomePage';
 import { WorksheetPage } from 'containers/WorksheetPage';
 import {
@@ -6,18 +6,27 @@ import {
     Switch,
     Route,
     Redirect,
+    RouteProps,
 } from 'react-router-dom';
 import schemas from 'schemas';
 import { getSchemaWorksheetType } from 'utils/schemas';
 import qs from 'querystring';
 
+const ScrollingRoute: FC<RouteProps> = (props) => {
+    useEffect(() => {
+        console.log('SCROLLING');
+        window.scrollTo(0, 0);
+    }, [props.location]);
+    return <Route {...props} />;
+};
+
 export const AppRouter: FC = () => (
     <Router>
         <Switch>
-            <Route exact path="/">
+            <ScrollingRoute exact path="/">
                 <HomePage />
-            </Route>
-            <Route
+            </ScrollingRoute>
+            <ScrollingRoute
                 exact
                 path="/worksheet"
                 render={({ location }) => {
