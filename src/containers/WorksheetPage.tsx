@@ -39,6 +39,7 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
     const worksheetType = getSchemaWorksheetType(schema);
     const history = useHistory();
     const [blockNav, setBlockNav] = useState(false);
+    const [forceErrors, setForceErrors] = useState(false);
     useNavBlock(blockNav);
     return (
         <Form>
@@ -75,12 +76,14 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
                     }}
                     schema={sch}
                     error={errors[key]}
+                    forceShowError={forceErrors}
                 />
             ))}
             <ShareButton
                 data={formattedData}
                 valid={valid}
                 onShared={() => setBlockNav(false)}
+                onClickInvalid={() => setForceErrors(true)}
             />
         </Form>
     );

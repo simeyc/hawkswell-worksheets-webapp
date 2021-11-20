@@ -14,6 +14,8 @@ M HAWKSWELL WORKLOG
 15/11/2021 - 2 hours - Work on improving dropdown menus on mobile view.
 16/11/2021 - 1.25 hours - Continue work on improving dropdown menus on mobile view.
 18/11/2021 - 1.5 hours - Continue improving dropdowns on mobile view.
+18/11/2021 - 1.25 hours - Continue improving dropdowns on mobile view. Scroll to top on route change.
+20/11/2021 - 1.25 hours - Finish mobile dropdowns. "Worksheet invalid" dialog
 
 TODO: prevent form submission on enter (remove semantic ui Form?)
 TODO: mobile dropdowns should show browser full screen option list

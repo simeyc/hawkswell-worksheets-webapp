@@ -25,7 +25,11 @@
 }
 
 .share-button {
-    width: 100%;
+    padding-bottom: 14px;
+    display: flex;
+    button {
+        flex: 1;
+    }
 }
 
 .error-message {
@@ -49,12 +53,19 @@
     padding: 0px !important;
 }
 
-select.styled-select {
-    padding: 0.5em !important;
-    &.placeholder {
-        color: rgba(191, 191, 191, 0.87) !important;
+.dropdown-option {
+    cursor: pointer;
+    display: flex;
+    .option-text {
+        flex: 1;
     }
-    option {
-        color: rgba(0, 0, 0, 0.87) !important;
+    .option-icon {
+        flex: 0;
     }
+}
+
+.app-container {
+    max-width: 500px;
+    margin: 0px auto;
+    padding: 14px;
 }

@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, Modal, Header } from 'semantic-ui-react';
 import { WorksheetData } from 'types';
 import { convertToCsv } from 'utils/worksheets';
 import { DownloadModal } from 'components/DownloadModal';
@@ -9,15 +9,19 @@ interface ShareButtonProps {
     data: WorksheetData;
     valid: boolean;
     onShared: () => void;
+    onClickInvalid: () => void;
 }
 
 export const ShareButton: FC<ShareButtonProps> = ({
     data,
     valid,
     onShared,
+    onClickInvalid,
 }) => {
     const [downloadData, setDownloadData] = useState('');
-    const onClick = async () => {
+    const [showInvalidModal, setShowInvalidModal] = useState(false);
+    const toggleInvalidModal = () => setShowInvalidModal(!showInvalidModal);
+    const onClickValid = async () => {
         const username = data['Driver'] as string;
         localStorage.setItem('username', username);
         data['Timestamp'] = Date.now(); // update Timestamp
@@ -42,19 +46,35 @@ export const ShareButton: FC<ShareButtonProps> = ({
         }
     };
     return (
-        <>
+        <div
+            className="share-button"
+            onClick={valid ? undefined : toggleInvalidModal}
+        >
             <Button
-                className="share-button"
-                content={valid ? 'Share' : 'Worksheet incomplete'}
-                color={valid ? 'green' : undefined}
-                onClick={onClick}
+                content="Share"
+                color="green"
+                onClick={onClickValid}
                 disabled={!valid}
+                icon={valid ? 'share' : 'ban'}
             />
             <DownloadModal
                 data={downloadData}
                 onClose={() => setDownloadData('')}
                 // TODO: call onShared on download (disables nav prompt)
             />
-        </>
+            <Modal open={showInvalidModal} closeOnDimmerClick={false}>
+                <Header icon="ban" content="Worksheet invalid" />
+                <Modal.Content content="Worksheet is invalid or incomplete. Please fix the errors marked in red." />
+                <Modal.Actions>
+                    <Button
+                        content="Ok"
+                        onClick={() => {
+                            onClickInvalid();
+                            toggleInvalidModal();
+                        }}
+                    />
+                </Modal.Actions>
+            </Modal>
+        </div>
     );
 };

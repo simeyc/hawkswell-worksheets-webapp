@@ -11,7 +11,7 @@ interface WorksheetFieldProps {
     value: WorksheetValue;
     setValue: (value: WorksheetValue) => void;
     error?: string;
-    //forceShowError?: boolean; // TODO: pass true after Share attempt while invalid
+    forceShowError?: boolean; // TODO: pass true after Share attempt while invalid
 }
 
 export const WorksheetField: FC<WorksheetFieldProps> = ({
@@ -20,16 +20,16 @@ export const WorksheetField: FC<WorksheetFieldProps> = ({
     value,
     setValue,
     error,
+    forceShowError,
 }) => {
     const [showError, setShowError] = useState(false);
-    const err = showError ? error : '';
+    const err = showError || forceShowError ? error : '';
     return schema.hidden ? null : (
         // prevent error affecting dropdown menu formatting
         <Form.Field error={!schema.enum && !!err}>
             <label>{title + ':'}</label>
             <ErrorMessage error={err} />
             <FieldControl
-                name={title}
                 schema={schema}
                 value={value}
                 setValue={(value) => {
