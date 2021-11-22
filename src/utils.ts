@@ -1,6 +1,10 @@
 import get from 'lodash.get';
 import { ValidateFunction } from 'ajv';
 import { WorksheetValue, FieldSchema, WorksheetData } from 'types';
+import { WorksheetSchema } from 'types';
+
+export const getSchemaWorksheetType = (schema: WorksheetSchema) =>
+    schema.properties['Job Type'].const;
 
 export const parseErrors = (validate: ValidateFunction) => {
     const errors: Record<string, string> = {};
@@ -49,3 +53,10 @@ export const convertToCsv = (data: WorksheetData) =>
         .reduce((acc: string, x) => acc + ',' + x, '')
         .slice(1) +
     '\n';
+
+export const constructFilename = (parts: string[], ext: string) => {
+    const sanitizedParts = parts.map((part) =>
+        part.replace(/[^a-zA-Z0-9]/g, '')
+    );
+    return sanitizedParts.join('_') + ext;
+};

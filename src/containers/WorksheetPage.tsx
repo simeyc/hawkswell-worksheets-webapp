@@ -2,8 +2,7 @@ import { FC, useState, useMemo } from 'react';
 import { Form, Divider, Button } from 'semantic-ui-react';
 import { WorksheetSchema, WorksheetData } from 'types';
 import Ajv from 'ajv';
-import { getSchemaWorksheetType } from 'utils/schemas';
-import { parseErrors, formatValue } from 'utils/worksheets';
+import { getSchemaWorksheetType, parseErrors, formatValue } from 'utils';
 import { useNavBlock } from 'hooks/useNavBlock';
 import { ShareButton } from 'components/ShareButton';
 import { WorksheetField } from 'components/WorksheetField';
@@ -60,7 +59,6 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
                     title={key}
                     value={data[key]}
                     setValue={(value) => {
-                        console.log('SET VALUE:', value);
                         !blockNav && setBlockNav(true);
                         setData({ ...data, [key]: value });
                         if (value === '') {

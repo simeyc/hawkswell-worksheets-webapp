@@ -9,12 +9,11 @@ import {
     RouteProps,
 } from 'react-router-dom';
 import schemas from 'schemas';
-import { getSchemaWorksheetType } from 'utils/schemas';
+import { getSchemaWorksheetType } from 'utils';
 import qs from 'querystring';
 
 const ScrollingRoute: FC<RouteProps> = (props) => {
     useEffect(() => {
-        console.log('SCROLLING');
         window.scrollTo(0, 0);
     }, [props.location]);
     return <Route {...props} />;

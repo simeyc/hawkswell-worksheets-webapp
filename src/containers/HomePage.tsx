@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Form, Header, Button, SemanticCOLORS } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { getSchemaWorksheetType } from 'utils/schemas';
+import { getSchemaWorksheetType } from 'utils';
 import schemas from 'schemas';
 import 'styles/styles.scss';
 

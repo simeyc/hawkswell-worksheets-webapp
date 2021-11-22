@@ -3,11 +3,11 @@
 definitions:
     nameString:
         type: string
-        pattern: "^[a-zA-z '-]+$"
+        pattern: "^[a-zA-Z '-]+$"
         error: Please use only plain letters, spaces, ' and - characters
     plainString:
         type: string
-        pattern: '^[a-zA-z ]+$'
+        pattern: '^[a-zA-Z ]+$'
         error: Please use only plain letters and spaces
     positiveNumber:
         type: number
