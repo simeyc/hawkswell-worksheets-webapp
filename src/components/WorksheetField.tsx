@@ -11,7 +11,7 @@ interface WorksheetFieldProps {
     value: WorksheetValue;
     setValue: (value: WorksheetValue) => void;
     error?: string;
-    forceShowError?: boolean; // TODO: pass true after Share attempt while invalid
+    forceShowError?: boolean;
 }
 
 export const WorksheetField: FC<WorksheetFieldProps> = ({

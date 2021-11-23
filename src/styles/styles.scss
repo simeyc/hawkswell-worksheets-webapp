@@ -15,20 +15,16 @@
     -webkit-text-stroke-color: #ff4500;
 }
 
-.label-div {
-    margin-bottom: 10px !important;
-}
-
 .worksheet-button {
     width: 100%;
     margin-bottom: 12px !important;
 }
 
 .share-button {
-    padding-bottom: 14px;
     display: flex;
     button {
         flex: 1;
+        min-height: 40px !important;
     }
 }
 
@@ -66,6 +62,20 @@
 
 .app-container {
     max-width: 500px;
-    margin: 0px auto;
-    padding: 14px;
+    margin: 14px auto;
+    padding: 0px 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-div {
+    flex: 0;
+    width: 100%;
+    text-align: center;
+    font-size: smaller;
+    color: grey;
+    padding-bottom: 14px;
+    .footer-separator {
+        margin: 0px 14px;
+    }
 }

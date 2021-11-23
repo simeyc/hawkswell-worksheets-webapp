@@ -18,9 +18,11 @@ export const DebouncedInput: FC<DebouncedInputProps> = ({
     const [debouncedValue] = useDebounce(editedValue, 500);
     useEffect(() => {
         editedValue !== stringValue && setEditedValue(stringValue);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [stringValue]);
     useEffect(() => {
         debouncedValue !== stringValue && setValue(debouncedValue);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [debouncedValue]);
     return (
         <Input

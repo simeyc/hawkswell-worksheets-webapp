@@ -33,6 +33,7 @@ export const ModalDropdown: FC<ModalDropdownProps> = ({
                         />
                         {options?.map((opt) => (
                             <Segment
+                                key={opt.value as string | number}
                                 className="dropdown-option"
                                 onClick={() => {
                                     setValue(opt.value as WorksheetValue);

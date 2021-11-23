@@ -46,6 +46,7 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
                 <div className="header-text">{`New ${worksheetType} Worksheet`}</div>
                 <Button
                     className="close-button"
+                    type="button" // prevent click on form submit
                     color="red"
                     icon="close"
                     size="mini"

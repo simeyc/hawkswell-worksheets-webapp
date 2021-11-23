@@ -63,6 +63,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
             onClick={valid ? undefined : toggleInvalidModal}
         >
             <Button
+                type="button" // prevent click on form submit
                 content="Share"
                 color="green"
                 onClick={onClickShare}
@@ -71,6 +72,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
             />
             <ResponsiveMedia greaterThanOrEqual="DESKTOP">
                 <Button
+                    type="button" // prevent click on form submit
                     content="Download"
                     color="yellow"
                     onClick={onClickDownload}

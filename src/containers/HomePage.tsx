@@ -27,7 +27,7 @@ export const HomePage: FC = () => (
             Worksheets Webapp
         </Header>
         <Form.Field>
-            <label className="label-div">Select a Worksheet Type:</label>
+            <label>Select a Worksheet Type:</label>
             {schemas.map((sch, i) => {
                 const worksheetType = getSchemaWorksheetType(sch);
                 return (
