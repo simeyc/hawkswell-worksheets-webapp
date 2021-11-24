@@ -17,6 +17,7 @@ M HAWKSWELL WORKLOG
 18/11/2021 - 1.25 hours - Continue improving dropdowns on mobile view. Scroll to top on route change.
 20/11/2021 - 1.25 hours - Finish mobile dropdowns. "Worksheet invalid" dialog
 22/11/2021 - 1.25 hours - Download button on desktop; format CSV file for share and download
-23/11/2021 - 1.75 hours - Add footer, fix styling, address react warnings, work on initial deployment
+23/11/2021 - 1.75 hours - Add footer, fix styling, address react warnings, initial deployment
+24/11/2021 - 1.5 hours - Fix footer styling, add version
 
 TODO: Share/download encrypted JSON file (encryption renders frontend useless for users without worksheet manager)

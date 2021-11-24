@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { AppRouter } from 'components/AppRouter';
 import { withResponsiveMedia } from 'components/ResponsiveMedia';
 import { Divider } from 'semantic-ui-react';
+import version from 'version';
 import 'styles/styles.scss';
 
 const App: FC = () => (
@@ -11,7 +12,7 @@ const App: FC = () => (
         </div>
         <footer>
             <Divider />
-            {`Version ${'TODO'}`}
+            {`Version ${version}`}
             <span className="separator">·</span>
             {`© ${new Date().getFullYear()} Simon Clarke`}
         </footer>
