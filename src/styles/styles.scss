@@ -62,20 +62,25 @@
 
 .app-container {
     max-width: 500px;
-    margin: 14px auto;
-    padding: 0px 14px;
+    margin: auto;
+    padding: 14px 14px 0px 14px;
     display: flex;
     flex-direction: column;
-}
-
-.footer-div {
-    flex: 0;
-    width: 100%;
-    text-align: center;
-    font-size: smaller;
-    color: grey;
-    padding-bottom: 14px;
-    .footer-separator {
-        margin: 0px 14px;
+    .app-content {
+        flex: 1;
+    }
+    footer {
+        flex: 0;
+        width: 100%;
+        text-align: center;
+        font-size: x-small;
+        color: grey;
+        padding-bottom: 7px;
+        .divider {
+            margin: 14px 0px 7px !important;
+        }
+        .separator {
+            margin: 0px 14px;
+        }
     }
 }

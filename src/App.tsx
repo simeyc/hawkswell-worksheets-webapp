@@ -6,15 +6,15 @@ import 'styles/styles.scss';
 
 const App: FC = () => (
     <div className="app-container">
-        <div style={{ flex: 1 }}>
+        <div className="app-content">
             <AppRouter />
         </div>
-        <span className="footer-div">
+        <footer>
             <Divider />
-            {`Version: ${'TODO'}`}
-            <span className="footer-separator">·</span>
+            {`Version ${'TODO'}`}
+            <span className="separator">·</span>
             {`© ${new Date().getFullYear()} Simon Clarke`}
-        </span>
+        </footer>
     </div>
 );
 
