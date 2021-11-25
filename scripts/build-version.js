@@ -28,6 +28,8 @@ const buildVersion = async () => {
     if (tagHash !== commitHash) {
         version += '_' + commitHash.slice(0, 6);
     }
+    // TODO: delete
+    console.log({ tag, tagHash, commitHash, version });
     await writeFile(OUTPUT_PATH, generateFileContent(version))
         .then(() => console.log(`Generated version.js. Version: ${version}.`))
         .catch((err) => console.error('ERROR:', err));

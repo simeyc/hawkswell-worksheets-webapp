@@ -3,6 +3,7 @@ import { Button, Modal, Header } from 'semantic-ui-react';
 import { WorksheetData } from 'types';
 import { convertToCsv, constructFilename } from 'utils';
 import { ResponsiveMedia } from 'components/ResponsiveMedia';
+import { isSafari } from 'react-device-detect';
 import 'styles/styles.scss';
 
 interface ShareButtonProps {
@@ -37,24 +38,16 @@ export const ShareButton: FC<ShareButtonProps> = ({
     const onClickShare = async () => {
         const { fileData, fileName, fileOpts } = getFileContent(data);
         const file = new File([fileData], fileName, fileOpts);
+        const shareData: ShareData = { files: [file] };
+        if (!isSafari) {
+            shareData.title = data['Job Type'] + ' Worksheet';
+            shareData.text = shareData.title; // TODO: debug random file name in Android WhatsApp
+        }
         try {
-            await navigator
-                .share({
-                    files: [file],
-                    title: data['Job Type'] + ' Worksheet',
-                })
-                .then(() => console.log('SHARED'))
-                .then(onShared)
-                .catch((err) => {
-                    console.log('NOT SHARED', { err });
-                    throw err;
-                });
+            await navigator.share(shareData).then(onShared);
         } catch (err) {
-            console.log('CAUGHT SHARE ERROR', { err });
             if (err instanceof Error && err.name !== 'AbortError') {
                 toggleDownloadModal();
-            } else {
-                console.log("It's an AbortError!");
             }
         }
     };
