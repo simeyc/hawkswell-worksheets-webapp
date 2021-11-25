@@ -43,9 +43,19 @@ export const ShareButton: FC<ShareButtonProps> = ({
                     files: [file],
                     title: data['Job Type'] + ' Worksheet',
                 })
-                .then(onShared);
+                .then(() => console.log('SHARED'))
+                .then(onShared)
+                .catch((err) => {
+                    console.log('NOT SHARED', { err });
+                    throw err;
+                });
         } catch (err) {
-            toggleDownloadModal();
+            console.log('CAUGHT SHARE ERROR', { err });
+            if (err instanceof Error && err.name !== 'AbortError') {
+                toggleDownloadModal();
+            } else {
+                console.log("It's an AbortError!");
+            }
         }
     };
     const onClickDownload = () => {

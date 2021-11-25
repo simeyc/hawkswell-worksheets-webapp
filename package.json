@@ -4,12 +4,11 @@
     "private": true,
     "scripts": {
         "start": "react-scripts start",
-        "dev": "set HTTPS=true && react-scripts start",
-        "build": "react-scripts build",
+        "start:dev": "set HTTPS=true && react-scripts start",
+        "build": "node scripts/build-schemas && node scripts/build-version && react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "build:schemas": "node scripts/build-schemas",
-        "build:version": "node scripts/build-version"
+        "build:dev": "node scripts/build-schemas && node scripts/build-version"
     },
     "dependencies": {
         "@artsy/fresnel": "^3.1.0",

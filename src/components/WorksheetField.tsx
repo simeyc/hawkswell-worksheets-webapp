@@ -25,8 +25,7 @@ export const WorksheetField: FC<WorksheetFieldProps> = ({
     const [showError, setShowError] = useState(false);
     const err = showError || forceShowError ? error : '';
     return schema.hidden ? null : (
-        // prevent error affecting dropdown menu formatting
-        <Form.Field error={!schema.enum && !!err}>
+        <Form.Field error={!!err}>
             <label>{title + ':'}</label>
             <ErrorMessage error={err} />
             <FieldControl
@@ -36,7 +35,7 @@ export const WorksheetField: FC<WorksheetFieldProps> = ({
                     setShowError(true);
                     setValue(value);
                 }}
-                error={err}
+                error={!!err}
             />
         </Form.Field>
     );

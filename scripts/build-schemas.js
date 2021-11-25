@@ -29,9 +29,11 @@ const buildSchemas = async () => {
                 )
             )
         )
-    ).catch((err) => {
-        console.error('ERROR:', err);
-    });
+    )
+        .then(() => console.log('Generated schemas.'))
+        .catch((err) => {
+            console.error('ERROR:', err);
+        });
 };
 
 buildSchemas();

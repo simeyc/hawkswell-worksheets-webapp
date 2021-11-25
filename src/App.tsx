@@ -15,6 +15,7 @@ const App: FC = () => (
             {`Version ${version}`}
             <span className="separator">·</span>
             {`© ${new Date().getFullYear()} Simon Clarke`}
+            <div>Authorised for use by M Hawkswell Contracting Ltd. only.</div>
         </footer>
     </div>
 );

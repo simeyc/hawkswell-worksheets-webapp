@@ -8,7 +8,7 @@ export interface FieldControlProps {
     schema: FieldSchema;
     value?: WorksheetValue;
     setValue: (value: WorksheetValue) => void;
-    error?: string;
+    error?: boolean;
 }
 
 export const FieldControl: FC<FieldControlProps> = ({
@@ -23,7 +23,7 @@ export const FieldControl: FC<FieldControlProps> = ({
             setValue={setValue}
             options={schema.enum.map((opt) => ({ value: opt, text: opt }))}
             placeholder={schema.placeholder || 'Select an option'}
-            error={!!error}
+            error={error}
             selection
         />
     ) : schema.type === 'boolean' ? (
@@ -38,6 +38,7 @@ export const FieldControl: FC<FieldControlProps> = ({
             value={value}
             setValue={setValue}
             placeholder={schema.placeholder || 'Enter a value'}
-            error={!!error}
+            error={error}
+            autoCapitalize="words"
         />
     );

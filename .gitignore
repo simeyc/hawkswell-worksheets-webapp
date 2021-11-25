@@ -27,3 +27,4 @@ yarn-error.log*
 
 # generated
 /src/version.js
+/src/schemas/build/*

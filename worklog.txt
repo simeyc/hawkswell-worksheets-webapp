@@ -1,4 +1,5 @@
 M HAWKSWELL WORKLOG
+Untracked  - Untracked - Conceptualisation, design and mockups (no charge)
 20/09/2021 - 2 hours - Project setup and barebones welcome page
 25/09/2021 - 2 hours - Barebones New Worksheet Page and Sprayer Worksheet
 30/09/2021 - 2 hours - Support default values; correct format of worksheet data
@@ -19,5 +20,6 @@ M HAWKSWELL WORKLOG
 22/11/2021 - 1.25 hours - Download button on desktop; format CSV file for share and download
 23/11/2021 - 1.75 hours - Add footer, fix styling, address react warnings, initial deployment
 24/11/2021 - 1.5 hours - Fix footer styling, add version
+25/11/2021 - ????????? - Fix version for intermediate releases; autocapitalize words in inputs; Fix dropdown error formatting; 
 
 TODO: Share/download encrypted JSON file (encryption renders frontend useless for users without worksheet manager)
