@@ -20,6 +20,9 @@ Untracked  - Untracked - Conceptualisation, design and mockups (no charge)
 22/11/2021 - 1.25 hours - Download button on desktop; format CSV file for share and download
 23/11/2021 - 1.75 hours - Add footer, fix styling, address react warnings, initial deployment
 24/11/2021 - 1.5 hours - Fix footer styling, add version
-25/11/2021 - ????????? - Fix version for intermediate releases; autocapitalize words in inputs; Fix dropdown error formatting; 
+25/11/2021 - 3 hours - Fix version for intermediate releases; autocapitalize words in inputs; Fix dropdown error formatting; debug iOS sharing; debug Android filenames
+TOTAL: 40.75 hours
 
 TODO: Share/download encrypted JSON file (encryption renders frontend useless for users without worksheet manager)
+TODO: Fix iOS sharing
+TODO: Fix file names

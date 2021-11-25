@@ -21,18 +21,14 @@ const generateFileContent = (version) =>
     'export default version;\n';
 
 const buildVersion = async () => {
-    const tag = await runCommand('git tag');
-    const tagHash = await runCommand('git rev-parse ' + tag);
-    const commitHash = await runCommand('git rev-parse HEAD');
-    let version = tag;
-    if (tagHash !== commitHash) {
-        version += '_' + commitHash.slice(0, 6);
+    try {
+        const version = await runCommand('git describe');
+        await writeFile(OUTPUT_PATH, generateFileContent(version)).then(() =>
+            console.log(`Generated version.js. Version: ${version}.`)
+        );
+    } catch (err) {
+        console.error('ERROR:', err);
     }
-    // TODO: delete
-    console.log({ tag, tagHash, commitHash, version });
-    await writeFile(OUTPUT_PATH, generateFileContent(version))
-        .then(() => console.log(`Generated version.js. Version: ${version}.`))
-        .catch((err) => console.error('ERROR:', err));
 };
 
 buildVersion();

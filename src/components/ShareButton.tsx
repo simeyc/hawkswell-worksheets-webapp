@@ -41,7 +41,6 @@ export const ShareButton: FC<ShareButtonProps> = ({
         const shareData: ShareData = { files: [file] };
         if (!isSafari) {
             shareData.title = data['Job Type'] + ' Worksheet';
-            shareData.text = shareData.title; // TODO: debug random file name in Android WhatsApp
         }
         try {
             await navigator.share(shareData).then(onShared);
