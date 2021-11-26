@@ -22,7 +22,7 @@ const getFileContent = (data: WorksheetData) => {
         [data['Job Type'] as string, username, data['Timestamp'].toString()],
         '.csv'
     );
-    return { fileData, fileName, fileOpts: { type: 'text/plain' } };
+    return { fileData, fileName, fileOpts: { type: 'text/csv' } };
 };
 
 export const ShareButton: FC<ShareButtonProps> = ({

@@ -22,7 +22,7 @@ const generateFileContent = (version) =>
 
 const buildVersion = async () => {
     try {
-        const version = await runCommand('git describe');
+        const version = await runCommand('git describe HEAD');
         await writeFile(OUTPUT_PATH, generateFileContent(version)).then(() =>
             console.log(`Generated version.js. Version: ${version}.`)
         );
