@@ -23,7 +23,9 @@ const generateFileContent = (version) =>
 const buildVersion = async () => {
     try {
         const hash = await runCommand('git rev-parse HEAD');
-        const version = await runCommand('git describe --tags ' + hash);
+        // netlify cannot use tags - do manual versioning?
+        //const version = await runCommand('git describe --tags ' + hash);
+        const version = '0_' + hash.split(0, 6);
         await writeFile(OUTPUT_PATH, generateFileContent(version)).then(() =>
             console.log(`Generated version.js. Version: ${version}.`)
         );
