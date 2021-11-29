@@ -3,6 +3,7 @@ import { FieldSchema, WorksheetValue } from 'types';
 import { Checkbox } from 'semantic-ui-react';
 import { DebouncedInput } from 'components/DebouncedInput';
 import { ModalDropdown } from 'components/ModalDropdown';
+import { DatePicker } from 'components/DatePicker';
 
 export interface FieldControlProps {
     schema: FieldSchema;
@@ -24,7 +25,6 @@ export const FieldControl: FC<FieldControlProps> = ({
             options={schema.enum.map((opt) => ({ value: opt, text: opt }))}
             placeholder={schema.placeholder || 'Select an option'}
             error={error}
-            selection
         />
     ) : schema.type === 'boolean' ? (
         // TODO: dropdown or radio buttons?
@@ -32,6 +32,13 @@ export const FieldControl: FC<FieldControlProps> = ({
             toggle
             checked={!!value}
             onChange={(_e, data) => setValue(!!data.checked)}
+        />
+    ) : schema.type === 'string' && schema.subType === 'date' ? (
+        <DatePicker
+            value={value as string}
+            setValue={setValue}
+            placeholder={schema.placeholder || 'Pick a date'}
+            error={error}
         />
     ) : (
         <DebouncedInput

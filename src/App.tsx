@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { AppRouter } from 'components/AppRouter';
-import { withResponsiveMedia } from 'components/ResponsiveMedia';
 import { Divider } from 'semantic-ui-react';
-import version from 'version';
+import { VERSION } from 'version';
 import 'styles/styles.scss';
 
 const App: FC = () => (
@@ -12,12 +11,12 @@ const App: FC = () => (
         </div>
         <footer>
             <Divider />
-            {`Version ${version}`}
+            {`Version ${VERSION}`}
             <span className="separator">·</span>
             {`© ${new Date().getFullYear()} Simon Clarke`}
-            <div>Authorised for use by M Hawkswell Contracting Ltd. only.</div>
+            <div>Authorised use by M Hawkswell Contracting Ltd. only.</div>
         </footer>
     </div>
 );
 
-export default withResponsiveMedia(App);
+export default App;

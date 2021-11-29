@@ -2,7 +2,12 @@ import { FC, useState, useMemo } from 'react';
 import { Form, Divider, Button } from 'semantic-ui-react';
 import { WorksheetSchema, WorksheetData } from 'types';
 import Ajv from 'ajv';
-import { getSchemaWorksheetType, parseErrors, formatValue } from 'utils';
+import {
+    getSchemaWorksheetType,
+    parseErrors,
+    formatValue,
+    getCurrentDate,
+} from 'utils';
 import { useNavBlock } from 'hooks/useNavBlock';
 import { ShareButton } from 'components/ShareButton';
 import { WorksheetField } from 'components/WorksheetField';
@@ -24,8 +29,7 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
             if (username) {
                 initData['Driver'] = username;
             }
-            // set Timestamp here for validity; updated by ShareButton
-            initData['Timestamp'] = Date.now();
+            initData['Date'] = getCurrentDate();
         });
         return initData;
     }, [schema.properties]);

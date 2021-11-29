@@ -26,5 +26,4 @@ yarn-error.log*
 /src/styles/compiled/*
 
 # generated
-/src/version.js
 /src/schemas/build/*

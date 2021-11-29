@@ -8,11 +8,12 @@ export type FieldSchema = {
     error?: string;
     const?: string | number | boolean;
     hidden?: boolean;
+    subType?: string;
 };
 
 export type WorksheetSchema = {
     properties: {
         [key: string]: FieldSchema;
-        "Job Type": FieldSchema & { const: string };
-    }
+        'Worksheet Type': FieldSchema & { const: string };
+    };
 };

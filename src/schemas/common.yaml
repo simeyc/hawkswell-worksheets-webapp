@@ -1,17 +1,16 @@
 ---
 '$id': common.yaml
 type: object
-required: [Job Type, Timestamp, Driver, Customer]
+required: [Worksheet Type, Date, Driver, Customer]
 properties:
-    Job Type:
+    Worksheet Type:
         '$ref': definitions.yaml#/definitions/plainString
-        hidden: true
-    Timestamp:
-        '$ref': definitions.yaml#/definitions/positiveInteger
         hidden: true
     Driver:
         '$ref': definitions.yaml#/definitions/nameString
         placeholder: Enter your name
+    Date:
+        '$ref': definitions.yaml#/definitions/dateString
     Customer:
         '$ref': definitions.yaml#/definitions/nameString
         placeholder: Enter customer's name

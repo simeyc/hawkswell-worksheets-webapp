@@ -22,7 +22,12 @@ export const ModalDropdown: FC<ModalDropdownProps> = ({
     const { value, options, placeholder } = props;
     return (
         <>
-            <Dropdown {...props} onOpen={toggleMenuOpen} open={false} />
+            <Dropdown
+                {...props}
+                onOpen={toggleMenuOpen}
+                open={false}
+                selection
+            />
             <Modal open={menuOpen} onClose={toggleMenuOpen} size="tiny">
                 <Modal.Content scrolling className="no-padding">
                     <Segment.Group>

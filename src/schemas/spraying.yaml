@@ -10,7 +10,7 @@ allOf:
           - Litres/ha
       additionalProperties: false
       properties:
-          Job Type:
+          Worksheet Type:
               const: Spraying
           Sprayer:
               type: string

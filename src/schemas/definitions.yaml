@@ -19,3 +19,8 @@ definitions:
         min: 1
         error: Please enter a positive whole number
         placeholder: Enter a number
+    dateString:
+        type: string
+        pattern: \d\d\/\d\d\/\d\d\d\d
+        error: Please pick a valid date
+        subType: date

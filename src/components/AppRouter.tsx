@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import { HomePage } from 'containers/HomePage';
 import { WorksheetPage } from 'containers/WorksheetPage';
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Switch,
     Route,
     Redirect,

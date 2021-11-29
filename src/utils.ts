@@ -4,7 +4,7 @@ import { WorksheetValue, FieldSchema, WorksheetData } from 'types';
 import { WorksheetSchema } from 'types';
 
 export const getSchemaWorksheetType = (schema: WorksheetSchema) =>
-    schema.properties['Job Type'].const;
+    schema.properties['Worksheet Type'].const;
 
 export const parseErrors = (validate: ValidateFunction) => {
     const errors: Record<string, string> = {};
@@ -56,7 +56,12 @@ export const convertToCsv = (data: WorksheetData) =>
 
 export const constructFilename = (parts: string[], ext: string) => {
     const sanitizedParts = parts.map((part) =>
-        part.replace(/[^a-zA-Z0-9]/g, '')
+        part.replace(/[^a-zA-Z0-9/]/g, '').replace(/\//g, '-')
     );
     return sanitizedParts.join('_') + ext;
+};
+
+export const getCurrentDate = () => {
+    const d = new Date();
+    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
 };

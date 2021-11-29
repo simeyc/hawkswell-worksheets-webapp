@@ -2,8 +2,7 @@ import { FC, useState } from 'react';
 import { Button, Modal, Header } from 'semantic-ui-react';
 import { WorksheetData } from 'types';
 import { convertToCsv, constructFilename } from 'utils';
-import { ResponsiveMedia } from 'components/ResponsiveMedia';
-import { isSafari } from 'react-device-detect';
+import { isBrowser } from 'react-device-detect';
 import 'styles/styles.scss';
 
 interface ShareButtonProps {
@@ -16,10 +15,9 @@ interface ShareButtonProps {
 const getFileContent = (data: WorksheetData) => {
     const username = data['Driver'] as string;
     localStorage.setItem('username', username);
-    data['Timestamp'] = Date.now(); // update Timestamp
     const fileData = convertToCsv(data);
     const fileName = constructFilename(
-        [data['Job Type'] as string, username, data['Timestamp'].toString()],
+        [data['Worksheet Type'] as string, username, data['Date'].toString()],
         '.csv'
     );
     return { fileData, fileName, fileOpts: { type: 'text/csv' } };
@@ -37,13 +35,10 @@ export const ShareButton: FC<ShareButtonProps> = ({
     const toggleInvalidModal = () => setShowInvalidModal(!showInvalidModal);
     const onClickShare = async () => {
         const { fileData, fileName, fileOpts } = getFileContent(data);
-        const file = new File([fileData], fileName, fileOpts);
-        const shareData: ShareData = { files: [file] };
-        if (!isSafari) {
-            shareData.title = data['Job Type'] + ' Worksheet';
-        }
         try {
-            await navigator.share(shareData).then(onShared);
+            await navigator
+                .share({ files: [new File([fileData], fileName, fileOpts)] })
+                .then(onShared);
         } catch (err) {
             if (err instanceof Error && err.name !== 'AbortError') {
                 toggleDownloadModal();
@@ -72,7 +67,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
                 disabled={!valid}
                 icon="share"
             />
-            <ResponsiveMedia greaterThanOrEqual="DESKTOP">
+            {isBrowser ? (
                 <Button
                     type="button" // prevent click on form submit
                     content="Download"
@@ -81,13 +76,13 @@ export const ShareButton: FC<ShareButtonProps> = ({
                     disabled={!valid}
                     icon="download"
                 />
-            </ResponsiveMedia>
+            ) : null}
             <Modal open={showDownloadModal} onClose={toggleDownloadModal}>
-                <Header icon="frown outline" content="Sharing is unavailable" />
+                <Header icon="frown outline" content="Unable to share" />
                 <Modal.Content content="Would you like to download the worksheet instead?" />
                 <Modal.Actions>
                     <Button
-                        color="blue"
+                        color="yellow"
                         content="Download"
                         icon="download"
                         onClick={onClickDownload}
