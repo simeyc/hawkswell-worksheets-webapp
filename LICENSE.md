@@ -1,2 +1,1 @@
-
-Copyright (C) 2021 simeyc
+Copyright (C) 2021 simeyc. Al Rights Reserved.

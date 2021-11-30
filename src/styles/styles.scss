@@ -85,8 +85,11 @@
     }
 }
 
-.modal-trigger {
-    input {
-        cursor: pointer;
+.datepicker-dropdown {
+    .icon {
+        float: right;
+        margin: 0px;
+        color: grey;
     }
+    padding-right: 10px !important;
 }

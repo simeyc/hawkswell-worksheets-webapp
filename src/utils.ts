@@ -61,7 +61,5 @@ export const constructFilename = (parts: string[], ext: string) => {
     return sanitizedParts.join('_') + ext;
 };
 
-export const getCurrentDate = () => {
-    const d = new Date();
-    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
-};
+export const formatDate = (date: Date) =>
+    `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;

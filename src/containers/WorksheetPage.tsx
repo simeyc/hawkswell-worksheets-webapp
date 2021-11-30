@@ -6,7 +6,7 @@ import {
     getSchemaWorksheetType,
     parseErrors,
     formatValue,
-    getCurrentDate,
+    formatDate,
 } from 'utils';
 import { useNavBlock } from 'hooks/useNavBlock';
 import { ShareButton } from 'components/ShareButton';
@@ -29,7 +29,7 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
             if (username) {
                 initData['Driver'] = username;
             }
-            initData['Date'] = getCurrentDate();
+            initData['Date'] = formatDate(new Date());
         });
         return initData;
     }, [schema.properties]);

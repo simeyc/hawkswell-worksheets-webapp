@@ -22,7 +22,8 @@ Untracked  - Untracked - Conceptualisation, design and mockups (no charge)
 24/11/2021 - 1.5 hours - Fix footer styling, add version
 25/11/2021 - 3 hours - Fix version for intermediate releases; autocapitalize words in inputs; Fix dropdown error formatting; debug iOS sharing; debug Android filenames
 26/11/2021 - 0.25 hours - debug automatic versioning; debug iOS sharing; debug Android file names
-TOTAL: 41 hours
+29/11/2021 - 2.5 hours - add date picker; consistent download option for iOS
+TOTAL: 43.5 hours
 
 TODO: Share/download encrypted JSON file (encryption renders frontend useless for users without worksheet manager)
 TODO: Fix iOS sharing
