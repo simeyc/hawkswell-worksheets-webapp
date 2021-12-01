@@ -1,0 +1,7 @@
+M HAWKSWELL TODOs
+
+Setup Google Sheets; add Pending sheet; generate client secret
+Add netlify serverless function to append JSON data to Pending sheet using client secret
+Replace Share button with Submit which calls serverless function; handle success and failure
+
+Write PC app to read Pending sheet, allow approval/rejection of Pending worksheets, append to other Google sheet(s), geenrate Excel files using queries

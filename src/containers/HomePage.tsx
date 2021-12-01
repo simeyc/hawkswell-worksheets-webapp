@@ -1,8 +1,15 @@
 import { FC } from 'react';
-import { Form, Header, Button, SemanticCOLORS } from 'semantic-ui-react';
+import {
+    Form,
+    Button,
+    Header,
+    Divider,
+    SemanticCOLORS,
+} from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { getSchemaWorksheetType } from 'utils';
 import schemas from 'schemas';
+import logo from 'assets/logo512x300.png';
 import 'styles/styles.scss';
 
 const COLORS: SemanticCOLORS[] = [
@@ -20,14 +27,15 @@ const COLORS: SemanticCOLORS[] = [
 
 export const HomePage: FC = () => (
     <Form>
-        <Header className="title-text" size="huge">
-            M. Hawkswell
-        </Header>
-        <Header className="subtitle-text" size="large">
-            Worksheets Webapp
-        </Header>
+        <div className="title-div">
+            <img src={logo} alt="logo" />
+            <Header className="title-text">
+                M. Hawkswell Contracting Ltd.
+            </Header>
+        </div>
+        <Divider />
         <Form.Field>
-            <label>Select a Worksheet Type:</label>
+            <label className="homepage-label">Select a Worksheet Type:</label>
             {schemas.map((sch, i) => {
                 const worksheetType = getSchemaWorksheetType(sch);
                 return (

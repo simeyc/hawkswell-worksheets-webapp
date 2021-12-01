@@ -4,6 +4,11 @@ import { Divider } from 'semantic-ui-react';
 import { VERSION } from 'version';
 import 'styles/styles.scss';
 
+const startYear = 2021;
+const currentYear = new Date().getFullYear();
+const copyrightYear =
+    currentYear === startYear ? currentYear : `${startYear} - ${currentYear}`;
+
 const App: FC = () => (
     <div className="app-container">
         <div className="app-content">
@@ -13,7 +18,7 @@ const App: FC = () => (
             <Divider />
             {`Version ${VERSION}`}
             <span className="separator">·</span>
-            {`© ${new Date().getFullYear()} Simon Clarke`}
+            {`© ${copyrightYear} S Clarke`}
             <div>Authorised use by M Hawkswell Contracting Ltd. only.</div>
         </footer>
     </div>

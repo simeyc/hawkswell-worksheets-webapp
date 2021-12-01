@@ -1,18 +1,20 @@
-.title-text {
-    text-align: center;
-    font-style: italic;
-    color: #fdd5b1 !important;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #ff4500;
+.title-div {
+    display: flex;
+    img {
+        flex: 0;
+        width: 30%;
+        max-width: 100px;
+        margin: auto 0px;
+    }
+    .title-text {
+        text-align: center;
+        font-family: 'Droid Sans';
+        margin: auto 14px !important;
+    }
 }
 
-.subtitle-text {
-    text-align: center;
-    font-style: italic;
-    color: #fdd5b1 !important;
-    margin-top: 0px !important;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #ff4500;
+.homepage-label {
+    margin-bottom: 10px !important;
 }
 
 .worksheet-button {
