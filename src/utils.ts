@@ -2,7 +2,7 @@ import get from 'lodash.get';
 import { ValidateFunction } from 'ajv';
 import { WorksheetValue, FieldSchema, WorksheetData } from 'types';
 import { WorksheetSchema } from 'types';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 
 export const getSchemaWorksheetType = (schema: WorksheetSchema) =>
     schema.properties['Worksheet Type'].const;
@@ -62,4 +62,5 @@ export const constructFilename = (parts: string[], ext: string) => {
     return sanitizedParts.join('_') + ext;
 };
 
-export const formatDate = (date = moment()) => date.format('DD/MM/YYYY');
+export const formatDate = (date?: Moment) =>
+    (date || moment()).format('DD/MM/YYYY');
