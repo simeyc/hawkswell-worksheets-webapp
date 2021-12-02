@@ -29,7 +29,7 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
             if (username) {
                 initData['Driver'] = username;
             }
-            initData['Date'] = formatDate(new Date());
+            initData['Date'] = formatDate();
         });
         return initData;
     }, [schema.properties]);

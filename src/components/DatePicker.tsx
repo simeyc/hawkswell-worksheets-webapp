@@ -2,6 +2,7 @@ import { FC, useState, useMemo } from 'react';
 import { Modal, Dropdown } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
 import { formatDate } from 'utils';
+import moment from 'moment';
 import 'styles/styles.scss';
 
 interface DatePickerProps {
@@ -19,10 +20,9 @@ export const DatePicker: FC<DatePickerProps> = ({
     const [open, setOpen] = useState(false);
     const toggleOpen = () => setOpen(!open);
     const [minDate, maxDate] = useMemo(() => {
-        const date = new Date();
-        const max = formatDate(date);
-        date.setFullYear(date.getFullYear() - 1);
-        return [formatDate(date), max];
+        const min = formatDate(moment().subtract(1, 'years'));
+        const max = formatDate();
+        return [min, max];
     }, []);
     return (
         <>
