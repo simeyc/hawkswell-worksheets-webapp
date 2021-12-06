@@ -58,7 +58,7 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
                 />
             </div>
             <Divider />
-            {Object.entries(schema.properties).map(([key, sch]) => (
+            {schema.order.map((key) => (
                 <WorksheetField
                     key={key}
                     title={key}
@@ -73,11 +73,14 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
                         } else {
                             setFormattedData({
                                 ...formattedData,
-                                [key]: formatValue(value, sch),
+                                [key]: formatValue(
+                                    value,
+                                    schema.properties[key]
+                                ),
                             });
                         }
                     }}
-                    schema={sch}
+                    schema={schema.properties[key]}
                     error={errors[key]}
                     forceShowError={forceErrors}
                 />
@@ -85,6 +88,7 @@ export const WorksheetPage: FC<{ schema: WorksheetSchema }> = ({ schema }) => {
             <ShareButton
                 data={formattedData}
                 valid={valid}
+                schema={schema}
                 onShared={() => setBlockNav(false)}
                 onClickInvalid={() => setForceErrors(true)}
             />

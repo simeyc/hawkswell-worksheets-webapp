@@ -10,11 +10,19 @@ const INPUT_DIR = path.resolve(__dirname, '../src/schemas');
 const OUTPUT_DIR = path.resolve(__dirname, '../src/schemas/build');
 const SCHEMA_NAMES = ['spraying'];
 
+const mergeOrder = (values) => {
+    const merged = values.reduce((acc, curr) => [...acc, ...curr], []);
+    return [...new Set(merged)];
+};
+
 const buildSchema = (name) =>
     $RefParser
         .dereference(path.resolve(INPUT_DIR, `./${name}.yaml`))
         .then((schema) =>
-            mergeAllOf(schema, { ignoreAdditionalProperties: true })
+            mergeAllOf(schema, {
+                ignoreAdditionalProperties: true,
+                resolvers: { order: mergeOrder },
+            })
         );
 
 const buildSchemas = async () => {

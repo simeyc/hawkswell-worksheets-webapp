@@ -3,21 +3,15 @@
 allOf:
     - '$ref': common.yaml
     - type: object
-      required:
-          - Sprayer
-          - Crop
-          - Hectares
-          - Litres/ha
+      required: [Sprayer, Crop, Hectares, Litres/ha]
+      order: [Sprayer, Crop, Hectares, Litres/ha]
       additionalProperties: false
       properties:
-          Worksheet Type:
+          Job:
               const: Spraying
           Sprayer:
               type: string
-              enum:
-                  - RB16
-                  - RB26
-                  - RB35
+              enum: [RB16, RB26, RB35]
               placeholder: Select sprayer
           Crop:
               '$ref': definitions.yaml#/definitions/plainString

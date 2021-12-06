@@ -5,7 +5,7 @@ import { WorksheetSchema } from 'types';
 import moment, { Moment } from 'moment';
 
 export const getSchemaWorksheetType = (schema: WorksheetSchema) =>
-    schema.properties['Worksheet Type'].const;
+    schema.properties['Job'].const;
 
 export const parseErrors = (validate: ValidateFunction) => {
     const errors: Record<string, string> = {};
@@ -45,15 +45,16 @@ export const formatValue = (value: WorksheetValue, schema: FieldSchema) => {
     return val;
 };
 
-export const convertToCsv = (data: WorksheetData) =>
-    Object.keys(data)
-        .reduce((acc, x) => acc + ',' + x, '')
-        .slice(1) +
-    '\n' +
-    Object.values(data)
-        .reduce((acc: string, x) => acc + ',' + x, '')
-        .slice(1) +
-    '\n';
+const buildCsvLine = (items: WorksheetValue[]) =>
+    items.reduce((acc: string, item) => acc + ',' + item, '').slice(1) + '\n';
+
+export const convertToCsv = (data: WorksheetData, keyOrder: string[]) =>
+    buildCsvLine(keyOrder) +
+    buildCsvLine(
+        keyOrder.map((key) =>
+            typeof data[key] !== 'undefined' ? data[key] : ''
+        )
+    );
 
 export const constructFilename = (parts: string[], ext: string) => {
     const sanitizedParts = parts.map((part) =>

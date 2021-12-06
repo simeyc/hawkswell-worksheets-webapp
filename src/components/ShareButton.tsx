@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { Button, Modal, Header } from 'semantic-ui-react';
-import { WorksheetData } from 'types';
+import { WorksheetData, WorksheetSchema } from 'types';
 import { convertToCsv, constructFilename } from 'utils';
 import { isBrowser } from 'react-device-detect';
 import 'styles/styles.scss';
@@ -8,16 +8,17 @@ import 'styles/styles.scss';
 interface ShareButtonProps {
     data: WorksheetData;
     valid: boolean;
+    schema: WorksheetSchema;
     onShared: () => void;
     onClickInvalid: () => void;
 }
 
-const getFileContent = (data: WorksheetData) => {
+const getFileContent = (data: WorksheetData, schema: WorksheetSchema) => {
     const username = data['Driver'] as string;
     localStorage.setItem('username', username);
-    const fileData = convertToCsv(data);
+    const fileData = convertToCsv(data, schema.order);
     const fileName = constructFilename(
-        [data['Worksheet Type'] as string, username, data['Date'].toString()],
+        [data['Job'] as string, username, data['Date'].toString()],
         '.csv'
     );
     return { fileData, fileName, fileOpts: { type: 'text/csv' } };
@@ -26,6 +27,7 @@ const getFileContent = (data: WorksheetData) => {
 export const ShareButton: FC<ShareButtonProps> = ({
     data,
     valid,
+    schema,
     onShared,
     onClickInvalid,
 }) => {
@@ -34,7 +36,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
     const [showInvalidModal, setShowInvalidModal] = useState(false);
     const toggleInvalidModal = () => setShowInvalidModal(!showInvalidModal);
     const onClickShare = async () => {
-        const { fileData, fileName, fileOpts } = getFileContent(data);
+        const { fileData, fileName, fileOpts } = getFileContent(data, schema);
         try {
             await navigator
                 .share({ files: [new File([fileData], fileName, fileOpts)] })
@@ -46,7 +48,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
         }
     };
     const onClickDownload = () => {
-        const { fileData, fileName, fileOpts } = getFileContent(data);
+        const { fileData, fileName, fileOpts } = getFileContent(data, schema);
         const blob = new Blob([fileData], fileOpts);
         let link = document.createElement('a');
         link.download = fileName;

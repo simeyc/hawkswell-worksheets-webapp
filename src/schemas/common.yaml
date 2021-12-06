@@ -1,9 +1,10 @@
 ---
 '$id': common.yaml
 type: object
-required: [Worksheet Type, Date, Driver, Customer]
+required: [Job, Driver, Date, Customer]
+order: [Job, Driver, Date, Customer]
 properties:
-    Worksheet Type:
+    Job:
         '$ref': definitions.yaml#/definitions/plainString
         hidden: true
     Driver:

@@ -12,8 +12,9 @@ export type FieldSchema = {
 };
 
 export type WorksheetSchema = {
+    order: string[];
     properties: {
         [key: string]: FieldSchema;
-        'Worksheet Type': FieldSchema & { const: string };
+        Job: FieldSchema & { const: string };
     };
 };
